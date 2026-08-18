@@ -25,9 +25,9 @@
 **Usuarios del sistema:**
 
 | Tipo de usuario | Qué necesita del sistema | Qué le preocupa |
-|Dueño de mascota (Cliente)|Poder ver horarios disponibles, agendar citas rápido, elegir el tipo de servicio y comprar productos desde su celular 24/7.|Que la plataforma sea difícil de usar, no saber si su cita realmente quedó confirmada, o pagar un producto y que no haya en existencia.|
-|Veterinaria (Administrador)|Subir productos nuevos, ver una agenda que se llene sola, recibir alertas de compra y que el sistema mande recordatorios automáticos.|Que los clientes agenden citas que se empalmen, o que hagan citas falsas y le hagan perder tiempo y dinero.|
-|Soporte Técnico (Superusuario)|Acceso total a bases de datos, código y configuraciones maestras para dar mantenimiento, instalar actualizaciones y solucionar errores.|Que el sistema sufra caídas (downtime), vulnerabilidades de seguridad, pérdida de datos o fallos críticos.|
+| Dueño de mascota (Cliente) | Poder ver horarios disponibles, agendar citas rápido, elegir el tipo de servicio y comprar productos desde su celular 24/7. |Que la plataforma sea difícil de usar, no saber si su cita realmente quedó confirmada, o pagar un producto y que no haya en existencia. |
+| Veterinaria (Administrador) | Subir productos nuevos, ver una agenda que se llene sola, recibir alertas de compra y que el sistema mande recordatorios automáticos. | Que los clientes agenden citas que se empalmen, o que hagan citas falsas y le hagan perder tiempo y dinero. |
+| Soporte Técnico (Superusuario) | Acceso total a bases de datos, código y configuraciones maestras para dar mantenimiento, instalar actualizaciones y solucionar errores. | Que el sistema sufra caídas (downtime), vulnerabilidades de seguridad, pérdida de datos o fallos críticos. |
 
 
 **Un conflicto entre usuarios: El cliente quiere la máxima flexibilidad: quiere poder cancelar su cita 5 minutos antes si le surge un imprevisto. Sin embargo, a la veterinaria esto le estorba porque pierde ese bloque de tiempo, dinero y la oportunidad de atender a otro paciente.**
