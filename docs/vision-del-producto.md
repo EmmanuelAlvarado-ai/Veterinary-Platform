@@ -1,11 +1,5 @@
 # Visión del producto
 
-> **Plantilla del curso · Ingeniería de Software I · SIS3407**
-> Este documento es el primer entregable del semestre y la base de todo lo que viene después.
-> Se entrega completo en la **semana 4** y se presenta ante el grupo.
->
-> **Cómo usarla:** copia este archivo a tu repositorio como `docs/vision-del-producto.md`, borra las instrucciones en gris de cada apartado y escribe tu contenido en su lugar. Conserva los títulos.
-
 ---
 
 **Autor: Noé EmmanueL Alvarado Rios**
@@ -16,35 +10,28 @@
 
 ## 1. Descripción del sistema
 
-*Instrucción: nombre del sistema y qué hace, en un párrafo que cualquier persona entienda sin ser del área. Si necesitas usar una palabra técnica para explicarlo, todavía no está listo.*
+**Nombre del sistema: Plataforma LavinPets**
 
-**Nombre del sistema:**
-
-**Descripción:**
+**Descripción: Un sistema web para que los clientes agenden citas y compren productos 24/7, mientras la veterinaria automatiza su agenda y el envío de recordatorios.**
 
 ---
 
 ## 2. Problema y usuarios
 
-*Instrucción: qué problema resuelve, a quién le sirve y, muy importante, qué hace esa gente hoy para arreglárselas sin el sistema. Esa última parte es la que revela el problema real.*
+**El problema: Administrar todo a mano quita mucho tiempo. Además, como no hay recordatorios automáticos, los clientes olvidan sus citas y la clínica pierde dinero. También se pierden ventas de productos porque la gente solo puede comprarlos si va físicamente al local.**
 
-**El problema:**
-
-**Cómo se resuelve hoy sin el sistema:**
+**Cómo se resuelve hoy sin el sistema: Los clientes tienen que llamar por teléfono o mandar mensajes de WhatsApp en horarios de atención para agendar una cita o preguntar por la existencia de productos. La dueña anota las citas en una libreta o en un Excel básico, y tiene que acordarse de mandar mensajes de texto manualmente un día antes para que los clientes no falten.**
 
 **Usuarios del sistema:**
 
 | Tipo de usuario | Qué necesita del sistema | Qué le preocupa |
-|---|---|---|
-| | | |
-| | | |
-| | | |
+|Dueño de mascota (Cliente)|Poder ver horarios disponibles, agendar citas rápido, elegir el tipo de servicio y comprar productos desde su celular 24/7.|Que la plataforma sea difícil de usar, no saber si su cita realmente quedó confirmada, o pagar un producto y que no haya en existencia.|
+|Veterinaria (Administrador)|Subir productos nuevos, ver una agenda que se llene sola, recibir alertas de compra y que el sistema mande recordatorios automáticos.|Que los clientes agenden citas que se empalmen, o que hagan citas falsas y le hagan perder tiempo y dinero.|
+|Soporte Técnico (Superusuario)|Acceso total a bases de datos, código y configuraciones maestras para dar mantenimiento, instalar actualizaciones y solucionar errores.|Que el sistema sufra caídas (downtime), vulnerabilidades de seguridad, pérdida de datos o fallos críticos.|
 
-*Instrucción: necesitas al menos dos tipos de usuario con necesidades distintas. Si los dos quieren exactamente lo mismo, probablemente sean el mismo usuario.*
 
-**Un conflicto entre usuarios:**
+**Un conflicto entre usuarios: El cliente quiere la máxima flexibilidad: quiere poder cancelar su cita 5 minutos antes si le surge un imprevisto. Sin embargo, a la veterinaria esto le estorba porque pierde ese bloque de tiempo, dinero y la oportunidad de atender a otro paciente.**
 
-*Instrucción: describe algo que un usuario quiera y que a otro le estorbe. Ahí está tu primera decisión de diseño real.*
 
 ---
 
