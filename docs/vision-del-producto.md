@@ -8,8 +8,8 @@
 
 ---
 
-**Autor:**
-**Fecha de la última versión:**
+**Autor: Noé EmmanueL Alvarado Rios**
+**Fecha de la última versión: 18/08/2026**
 **Repositorio:**
 
 ---
