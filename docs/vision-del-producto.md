@@ -10,7 +10,7 @@
 
 **Autor: Noé EmmanueL Alvarado Rios**
 **Fecha de la última versión: 18/08/2026**
-**Repositorio:**
+**Repositorio: https://github.com/EmmanuelAlvarado-ai/Ingenieria-de-Software/blob/main/docs/vision-del-producto.md **
 
 ---
 
