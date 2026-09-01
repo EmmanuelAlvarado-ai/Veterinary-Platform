@@ -113,13 +113,12 @@ Modelo en Cascada.
 
 Asume que podemos conocer y congelar todos los requisitos hoy. En una clínica veterinaria hay excepciones operativas que la dueña recordará hasta que vea la primera versión de la agenda. Prohibirnos retroceder a la fase de especificación arruinaría la utilidad del software.
 
-**Alternativa 2:** 
+**Alternativa 2:**
 
-Modelo V.
+Modelo en Espiral.
 
-*Por qué la descarté:* 
-
-Este no es un sistema crítico (como el software de un avión) donde una falla técnica cueste vidas. El rigor y la pesada documentación de validación formal que exige el Modelo V no se justifican para un sistema web de agendamiento y realentizaria el proceso.
+*Por qué la descarté:*
+El modelo en Espiral es excelente para manejar la incertidumbre, pero está diseñado para proyectos donde el mayor riesgo es técnico o de factibilidad arquitectónica. En el caso de LavinPets, programar una agenda web y un catálogo es tecnología estándar y dominada (el riesgo técnico es bajo). Nuestro verdadero riesgo es de negocio (que los dueños de mascotas realmente adopten la plataforma).
 
 ---
 
