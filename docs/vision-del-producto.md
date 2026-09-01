@@ -58,7 +58,7 @@
 **Por qué queda fuera:**
 
 
-La gestión de expedientes clínicos queda fuera porque la complejidad regulatoria y el volumen de datos médicos convertirían el proyecto en un software de salud completo. Esto excede el tiempo de un semestre y no aporta al problema central de este proyecto, que es optimizar la agenda y habilitar las ventas en línea.
+La gestión de expedientes clínicos queda fuera porque la complejidad regulatoria y el volumen de datos médicos convertirían el proyecto en un software de salud completo. Esto no aporta al problema central de este proyecto, que es optimizar la agenda y habilitar las ventas en línea.
 
 ---
 
@@ -102,7 +102,7 @@ Modelo Ágil (Iterativo e incremental)
 **Por qué le conviene a este proyecto:**
 
 
-Este proyecto tiene un riesgo principalmente de negocio (saber si los clientes realmente adoptarán la plataforma) y una cliente (la dueña) altamente disponible. Los requisitos de la interfaz y la agenda no son completamente estables, ya que la dueña descubrirá nuevas necesidades operativas al interactuar con el sistema. Entregar software funcionando en ciclos cortos nos permitirá ajustar el flujo de las citas y de la tienda con base en retroalimentación real del usuario, en lugar de esperar hasta el final del semestre.
+Este proyecto tiene un riesgo principalmente de negocio (saber si los clientes realmente adoptarán la plataforma) y una cliente (la dueña) altamente disponible. Los requisitos de la interfaz y la agenda no son completamente estables, ya que la dueña descubrirá nuevas necesidades operativas al interactuar con el sistema. Entregar software funcionando en ciclos cortos nos permitirá ajustar el flujo de las citas y de la tienda con base en retroalimentación real del usuario.
 
 ### Alternativas descartadas
 
