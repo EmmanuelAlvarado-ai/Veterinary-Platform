@@ -40,74 +40,87 @@
 
 ## 3. Alcance
 
-*Instrucción: lo que escribes en "fuera del alcance" es lo que después evita que el proyecto crezca sin control. Sé específico: "reportes" no dice nada, "reportes de ventas mensuales exportables a PDF" sí.*
 
 ### Dentro del alcance
 
--
--
--
--
+- **Registra** citas médicas y servicios estéticos asociándolos a un cliente y su mascota.
+- **Bloquea** horarios en el calendario de la veterinaria automáticamente, dependiendo de la duración específica de cada tipo de servicio.
+- **Procesa** compras de productos físicos mediante un catálogo en línea.
+- **Envía** notificaciones automáticas de recordatorio (vía correo o SMS) a los clientes 24 horas antes de su cita.
+- **Autentica** a tres tipos de usuarios con permisos distintos (Cliente, Veterinaria, Soporte Técnico).
 
 ### Explícitamente fuera del alcance
 
--
--
--
+- No gestiona expedientes clínicos detallados, historias médicas, ni almacenamiento de radiografías de las mascotas.
+- No controla el inventario físico de la clínica ni envía órdenes de reabastecimiento automáticas a proveedores.
+- No procesa el cobro ni la facturación de las consultas médicas (el servicio médico se paga presencialmente en la clínica).
 
 **Por qué queda fuera:**
 
-*Instrucción: para al menos una de las exclusiones, explica la razón. Puede ser tiempo, complejidad, o que no aporta al problema central.*
+
+La gestión de expedientes clínicos queda fuera porque la complejidad regulatoria y el volumen de datos médicos convertirían el proyecto en un software de salud completo. Esto excede el tiempo de un semestre y no aporta al problema central de este proyecto, que es optimizar la agenda y habilitar las ventas en línea.
 
 ---
 
 ## 4. Tipo de sistema y restricciones
 
-*Instrucción: identifica de qué tipo es tu sistema y qué te obliga a garantizar ese tipo. Un sistema de información y un sistema crítico no se diseñan igual.*
 
 **Tipo de sistema:**
+
+De información (con modelo de entrega Web y SaaS)
 
 *(De información · Embebido · Crítico · Web y SaaS · De datos y análisis)*
 
 **Por qué es de ese tipo:**
 
+Porque su objetivo principal es registrar, consultar y gestionar la información operativa y comercial de la clínica LavinPets para facilitar su trabajo diario y mejorar la comunicación con los clientes.
+
 **Atributos de calidad que impone:**
 
 | Atributo | Por qué importa en mi caso | Qué pasa si no se cumple |
 |---|---|---|
-| | | |
-| | | |
-| | | |
+| **Usabilidad** | Los dueños de mascotas buscan conveniencia al agendar y comprar desde su celular. | El sistema será abandonado y los clientes seguirán saturando el WhatsApp de la clínica. |
+| **Integridad de los datos** | La agenda es compartida en tiempo real por la veterinaria y múltiples clientes entrando a la vez. | Se empalmarían citas (doble reserva) en el mismo horario o se vendería un producto sin stock físico. |
+| **Control de acceso** | Hay tres tipos de usuarios y el sistema manejará datos de clientes y configuración del negocio. | Un cliente podría borrar la agenda, o modificar el catálogo de productos por error. |
 
 **Reglas de negocio que ya identifiqué:**
 
-*Instrucción: reglas que no son obvias desde fuera y que alguien que conoce el dominio tendría que explicarte. Si no encuentras ninguna, tu caso puede ser demasiado simple.*
 
-1.
-2.
-3.
+1. Un servicio de "Vacunación" bloquea la agenda por 15 minutos, mientras que uno de "Estética" bloquea 45 minutos. El sistema debe calcular el tiempo a bloquear dinámicamente.
+2. El cliente solo puede cancelar su cita desde el sistema si lo hace con al menos 24 horas de anticipación; de lo contrario, la opción se bloquea.
+3. No todos los servicios se pueden agendar en línea. Por ejemplo, las cirugías están bloqueadas en el sistema web porque requieren una valoración médica presencial previa.
 
 ---
 
 ## 5. Ciclo de vida elegido
 
-*Instrucción: este apartado se trabaja en la semana 3, después de ver los modelos de desarrollo. La justificación pesa más que la elección: no hay un modelo correcto, hay uno defendible para tu caso.*
 
 **Modelo elegido:**
 
+Modelo Ágil (Iterativo e incremental)
+
 **Por qué le conviene a este proyecto:**
 
-*Instrucción: argumenta con las características reales de tu caso. Estabilidad de los requisitos, disponibilidad del cliente, nivel de riesgo, tamaño del equipo, frecuencia de entregas esperada.*
+
+Este proyecto tiene un riesgo principalmente de negocio (saber si los clientes realmente adoptarán la plataforma) y una cliente (la dueña) altamente disponible. Los requisitos de la interfaz y la agenda no son completamente estables, ya que la dueña descubrirá nuevas necesidades operativas al interactuar con el sistema. Entregar software funcionando en ciclos cortos nos permitirá ajustar el flujo de las citas y de la tienda con base en retroalimentación real del usuario, en lugar de esperar hasta el final del semestre.
 
 ### Alternativas descartadas
 
-**Alternativa 1:**
+**Alternativa 1:** 
 
-*Por qué la descarté:*
+Modelo en Cascada.
 
-**Alternativa 2:**
+*Por qué la descarté:* 
 
-*Por qué la descarté:*
+Asume que podemos conocer y congelar todos los requisitos hoy. En una clínica veterinaria hay excepciones operativas que la dueña recordará hasta que vea la primera versión de la agenda. Prohibirnos retroceder a la fase de especificación arruinaría la utilidad del software.
+
+**Alternativa 2:** 
+
+Modelo V.
+
+*Por qué la descarté:* 
+
+Este no es un sistema crítico (como el software de un avión) donde una falla técnica cueste vidas. El rigor y la pesada documentación de validación formal que exige el Modelo V no se justifican para un sistema web de agendamiento y nos haría avanzar demasiado lento para el tiempo que dura el semestre.
 
 ---
 
