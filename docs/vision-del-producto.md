@@ -22,7 +22,7 @@
 
 **El problema: Administrar todo a mano quita mucho tiempo. Además, como no hay recordatorios automáticos, los clientes olvidan sus citas y la clínica pierde dinero. También se pierden ventas de productos porque la gente solo puede comprarlos si va físicamente al local.**
 
-**Cómo se resuelve hoy sin el sistema: Los clientes tienen que llamar por teléfono o mandar mensajes de WhatsApp en horarios de atención para agendar una cita o preguntar por la existencia de productos. La dueña anota las citas en una libreta o en un Excel básico, y tiene que acordarse de mandar mensajes de texto manualmente un día antes para que los clientes no falten.**
+**Cómo se resuelve hoy sin el sistema: Los clientes tienen que llamar por teléfono o mandar mensajes de WhatsApp en horarios de atención para agendar una cita o preguntar por la existencia de productos. La dueña anota las citas en una libreta, y tiene que acordarse de mandar mensajes de texto manualmente un día antes para que los clientes no falten.**
 
 **Usuarios del sistema:**
 
@@ -46,7 +46,7 @@
 - **Registra** citas médicas y servicios estéticos asociándolos a un cliente y su mascota.
 - **Bloquea** horarios en el calendario de la veterinaria automáticamente, dependiendo de la duración específica de cada tipo de servicio.
 - **Procesa** compras de productos físicos mediante un catálogo en línea.
-- **Envía** notificaciones automáticas de recordatorio (vía correo o SMS) a los clientes 24 horas antes de su cita.
+- **Envía** notificaciones automáticas de recordatorio (vía WhatsApp o SMS) a los clientes 24 horas antes de su cita.
 - **Autentica** a tres tipos de usuarios con permisos distintos (Cliente, Veterinaria, Soporte Técnico).
 
 ### Explícitamente fuera del alcance
