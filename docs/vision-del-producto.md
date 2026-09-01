@@ -69,7 +69,6 @@ La gestión de expedientes clínicos queda fuera porque la complejidad regulator
 
 De información (con modelo de entrega Web y SaaS)
 
-*(De información · Embebido · Crítico · Web y SaaS · De datos y análisis)*
 
 **Por qué es de ese tipo:**
 
