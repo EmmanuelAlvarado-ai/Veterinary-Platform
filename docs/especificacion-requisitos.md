@@ -1,0 +1,288 @@
+# Especificación de requisitos
+
+**Sistema:** Plataforma LavinPets  
+**Autor:** Noé Emmanuel Alvarado Ríos  
+**Fecha de la última actualización:** 30/09/2026  
+
+---
+
+## 1. Propósito y alcance
+
+**Propósito del documento:**  
+Especificar los requisitos funcionales y no funcionales, así como los casos de uso principales para la construcción de la Plataforma LavinPets, sirviendo como guía verificable para el diseño, desarrollo y validación del sistema.
+
+**Alcance del sistema:**  
+El sistema registra citas médicas y estéticas, calculando dinámicamente y bloqueando el tiempo en la agenda según el servicio. Permite al administrador suspender citas en bloque por urgencias, disparando avisos automáticos. Envía recordatorios de citas 24 horas antes y procesa la compra y el cobro en línea de productos físicos mediante una pasarela de pagos externa.
+
+**Fuera del alcance:**  
+No gestiona expedientes clínicos, no controla inventarios físicos de la clínica ni emite órdenes a proveedores. No procesa cobros ni facturación de servicios médicos (se pagan presencialmente). No gestiona envíos a domicilio para la tienda en línea (la entrega es estrictamente recolección en tienda).
+
+---
+
+## 2. Usuarios y su contexto
+
+| Usuario | Qué hace hoy sin el sistema | Qué espera del sistema |
+| :--- | :--- | :--- |
+| **Cliente (Dueño de mascota)** | Llama o manda WhatsApp (a veces de madrugada) para agendar. Va físicamente a la clínica si quiere comprar un accesorio. | Poder ver horarios libres, agendar citas en cualquier momento desde su celular, y comprar productos en línea para solo pasar a recogerlos. |
+| **Veterinaria (Administrador)** | Anota citas en libreta, a veces olvida registrarlas o mandar recordatorios. En urgencias, no tiene tiempo de avisar a los clientes y se genera caos. | Una agenda automatizada que evite empalmes, recordatorios automáticos para no perder ingresos, y un "botón de pánico" para reaccionar ante urgencias. |
+| **Soporte Técnico** | N/A (Nuevo rol en el sistema) | Acceso a configuraciones maestras para dar mantenimiento y solucionar errores de plataforma. |
+
+**Conflictos identificados entre usuarios:**  
+El cliente desea flexibilidad total para agendar o presentarse con múltiples mascotas a la vez; la Veterinaria necesita control estricto del tiempo (cada mascota un bloque) y prohíbe las cancelaciones de última hora para no perder dinero.
+
+---
+
+## 3. Requisitos funcionales
+
+### 3.1 Resumen
+
+| ID | Nombre | Prioridad | Origen |
+| :--- | :--- | :--- | :--- |
+| RF-001 | Bloqueo dinámico de agenda | Imprescindible | Entrevista (confirmado) |
+| RF-002 | Restricción de cirugías web | Imprescindible | Entrevista (confirmado) |
+| RF-003 | Suspensión de agenda por urgencia | Importante | Entrevista (hallazgo inesperado) |
+| RF-004 | Notificación de cancelación masiva | Importante | Supuesto derivado de RF-003 |
+| RF-005 | Restricción de cobro a productos | Imprescindible | Entrevista (confirmado) |
+
+### 3.2 Fichas
+
+**RF-001 · Bloqueo dinámico de agenda**
+*   **Descripción:** El sistema bloquea el tiempo en la agenda dependiendo del servicio: 20 minutos para "Vacunación" y 60 minutos para "Estética".
+*   **Origen:** Entrevista con la dueña, 30 de septiembre (Regla ajustada).
+*   **Prioridad:** Imprescindible.
+*   **Criterio de aceptación:** Al guardar una cita de "Vacunación" a las 10:00 AM, el sistema muestra el horario de 10:00 a 10:20 ocupado. Al guardar "Estética", ocupa de 10:00 a 11:00 AM.
+*   **Relacionado con:** RNF-INT-001.
+
+**RF-002 · Restricción de cirugías web**
+*   **Descripción:** El sistema impide que un usuario tipo Cliente agende el servicio "Cirugía" de manera directa.
+*   **Origen:** Entrevista con la dueña, 30 de septiembre (Confirmado).
+*   **Prioridad:** Imprescindible.
+*   **Criterio de aceptación:** Al intentar seleccionar "Cirugía" en el catálogo de servicios web, el botón de confirmar se deshabilita y se muestra el mensaje: "Requiere agendar Revisión General previa".
+*   **Relacionado con:** N/A.
+
+**RF-003 · Suspensión de agenda por urgencia**
+*   **Descripción:** El sistema cambia a estado "Cancelado" todas las citas posteriores a la hora actual en el día en curso al presionar el botón de suspensión de urgencia.
+*   **Origen:** Entrevista con la dueña, 30 de septiembre (Hallazgo inesperado).
+*   **Prioridad:** Importante.
+*   **Criterio de aceptación:** Si son las 2:00 PM y el administrador presiona la suspensión, todas las citas entre las 2:01 PM y el cierre del día cambian su estado a cancelado en un solo clic.
+*   **Relacionado con:** RF-004.
+
+**RF-004 · Notificación de cancelación masiva**
+*   **Descripción:** El sistema envía un correo electrónico de aviso de reagendación a los clientes cuyas citas fueron afectadas por la suspensión de urgencia.
+*   **Origen:** Supuesto propio derivado de la necesidad de urgencias.
+*   **Prioridad:** Importante.
+*   **Criterio de aceptación:** Al ejecutarse el RF-003, el sistema despacha correos a las direcciones registradas de los afectados en un máximo de 2 minutos.
+*   **Relacionado con:** RF-003, RNF-REN-001.
+
+**RF-005 · Restricción de cobro a productos**
+*   **Descripción:** El sistema procesa pagos en línea exclusivamente para los carritos que contienen artículos del catálogo de productos físicos.
+*   **Origen:** Entrevista con la dueña, 30 de septiembre (Confirmado).
+*   **Prioridad:** Imprescindible.
+*   **Criterio de aceptación:** Si el usuario tiene una consulta en el carrito, el flujo salta a "Confirmar cita" sin pedir tarjeta. Si tiene croquetas, el sistema exige el pago mediante la pasarela antes de confirmar el pedido.
+*   **Relacionado con:** N/A.
+
+---
+
+## 4. Requisitos no funcionales
+
+### 4.1 Resumen
+
+| ID | Atributo | Nombre | Prioridad | Origen |
+| :--- | :--- | :--- | :--- | :--- |
+| RNF-USA-001 | Usabilidad | Límite de clics para agendar | Imprescindible | Derivado de tipo de sistema |
+| RNF-INT-001 | Integridad | Prevención de empalmes | Imprescindible | Entrevista (dolor del negocio) |
+| RNF-DIS-001 | Disponibilidad | Uptime del portal web | Importante | Derivado de tipo de sistema |
+
+### 4.2 Fichas
+
+**RNF-USA-001 · Límite de clics para agendar**
+*   **Atributo de calidad:** Usabilidad.
+*   **Descripción:** Un usuario tipo Cliente completa el flujo de agendar una cita en un máximo de cuatro clics desde la pantalla principal.
+*   **Métrica:** Número absoluto de clics u toques en pantalla (máximo 4) para un paciente previamente registrado.
+*   **Origen:** Derivado del tipo de sistema (B2C Web).
+*   **Prioridad:** Imprescindible.
+*   **Por qué importa:** Si el sistema es más largo o confuso que mandar un WhatsApp, los clientes lo abandonarán y seguirán saturando el teléfono de la clínica de madrugada.
+*   **Afecta a:** RF-001.
+
+**RNF-INT-001 · Prevención de empalmes concurrentes**
+*   **Atributo de calidad:** Integridad de los datos.
+*   **Descripción:** El sistema rechaza las peticiones concurrentes para el mismo bloque de horario con un tiempo de respuesta menor a 2 segundos.
+*   **Métrica:** Tiempo de validación de disponibilidad en base de datos al momento de guardar (menor a 2000 ms).
+*   **Origen:** Entrevista (las citas duplicadas o mal anotadas generan caos en piso).
+*   **Prioridad:** Imprescindible.
+*   **Por qué importa:** Al ser un entorno web, dos dueños pueden dar clic al mismo tiempo. Si el sistema guarda ambas, habrá dos pacientes para un solo consultorio.
+*   **Afecta a:** RF-001.
+
+**RNF-DIS-001 · Uptime del portal web**
+*   **Atributo de calidad:** Disponibilidad.
+*   **Descripción:** El portal de agendamiento y catálogo está accesible el 99.9% del tiempo fuera de ventanas de mantenimiento programadas.
+*   **Métrica:** Porcentaje de tiempo de actividad mensual medido por herramientas de monitoreo.
+*   **Origen:** Derivado del tipo de sistema (SaaS).
+*   **Prioridad:** Importante.
+*   **Por qué importa:** El mayor dolor de la veterinaria son los mensajes a las 11:00 PM. El sistema existe para operar justamente cuando la clínica física está cerrada.
+*   **Afecta a:** N/A.
+
+---
+
+## 5. Casos de uso
+
+*(Nota: El diagrama visual de casos de uso `casos-de-uso.png` con la notación UML (actores externos, casos de uso internos y asociaciones) se encuentra en la carpeta `docs/diagramas/` del repositorio).*
+
+### Lista de Casos de Uso del Sistema
+1. **CU-01:** Agendar cita de servicio
+2. **CU-02:** Cancelar cita programada
+3. **CU-03:** Comprar productos físicos
+4. **CU-04:** Administrar catálogo de productos
+5. **CU-05:** Suspender agenda por urgencia
+6. **CU-06:** Registrar perfil de mascota
+7. **CU-07:** Consultar agenda del día
+8. **CU-08:** Consultar historial de citas
+
+---
+
+### Detalle de los Casos de Uso
+
+**CU-01 · Agendar cita de servicio**
+*   **Actor principal:** Cliente (Dueño de mascota).
+*   **Objetivo:** Reservar un bloque de tiempo específico en la clínica veterinaria para un servicio.
+*   **Precondición:** El Cliente tiene sesión iniciada y al menos una mascota registrada.
+*   **Escenario principal:**
+    1. El Cliente selecciona a la mascota que recibirá la atención.
+    2. El Cliente elige el tipo de servicio deseado del catálogo (ej. Vacunación).
+    3. El sistema calcula dinámicamente el tiempo de bloqueo requerido para ese servicio.
+    4. El sistema consulta la base de datos y muestra los horarios libres.
+    5. El Cliente selecciona una fecha y hora específica.
+    6. El sistema verifica internamente que el espacio no se haya ocupado en ese instante.
+    7. El sistema registra la cita, bloquea el tiempo y muestra la pantalla de confirmación.
+*   **Flujos alternos:**
+    *   **2a. Servicio restringido:** Si elige "Cirugía", el sistema bloquea el calendario y muestra "Requiere agendar Revisión General previa".
+    *   **5a. Múltiples mascotas:** El Cliente intenta agrupar mascotas; el sistema notifica que cada mascota requiere un bloque individual y lo redirige.
+    *   **6a. Concurrencia:** El horario fue ocupado por otro usuario; el sistema lanza el error "Horario no disponible" y recarga las horas libres.
+*   **Postcondición:** El bloque de tiempo queda oficialmente ocupado y visible para la Veterinaria.
+*   **Requisitos que realiza:** RF-001, RF-002, RNF-USA-001, RNF-INT-001.
+
+**CU-02 · Cancelar cita programada**
+*   **Actor principal:** Cliente (Dueño de mascota).
+*   **Objetivo:** Liberar un espacio de la agenda que el cliente ya no podrá utilizar.
+*   **Precondición:** El Cliente tiene sesión iniciada y cuenta con una cita futura registrada.
+*   **Escenario principal:**
+    1. El Cliente accede a su sección de "Mis Citas".
+    2. El Cliente selecciona la cita que desea cancelar y presiona "Cancelar cita".
+    3. El sistema verifica el tiempo restante entre la hora actual y la hora de la cita.
+    4. El sistema cambia el estado de la cita a "Cancelada por cliente" y libera el horario.
+    5. El sistema notifica la cancelación en el panel de la Veterinaria.
+*   **Flujos alternos:**
+    *   **3a. Violación de política de tiempo:** Faltan menos de 24 horas para la cita. El sistema oculta el botón de cancelación y muestra: "Las citas con menos de 24 horas de proximidad no pueden cancelarse por sistema".
+*   **Postcondición:** La cita se anula y el bloque de tiempo vuelve a estar disponible.
+*   **Requisitos que realiza:** Regla de Negocio 2 (Política de 24 horas).
+
+**CU-03 · Comprar productos físicos**
+*   **Actor principal:** Cliente.
+*   **Objetivo:** Pagar en línea artículos del catálogo para asegurar su disponibilidad y pasar a recogerlos.
+*   **Precondición:** El Cliente tiene artículos agregados en su carrito de compras.
+*   **Escenario principal:**
+    1. El Cliente abre el carrito y presiona "Proceder al pago".
+    2. El sistema verifica la existencia en inventario de cada producto.
+    3. El sistema redirige al Cliente a la pasarela de pagos externa.
+    4. La pasarela confirma la transacción exitosa al sistema.
+    5. El sistema genera el comprobante de compra con estatus "Pendiente de recolección en tienda" y resta el inventario.
+*   **Flujos alternos:**
+    *   **2a. Falta de stock (Empalme físico):** El sistema detecta que el producto se agotó físicamente. Bloquea el cobro y pide al Cliente sacarlo del carrito.
+    *   **4a. Pago declinado:** La pasarela rechaza la tarjeta. El sistema regresa al Cliente a la pantalla de pago mostrando el error de la pasarela.
+*   **Postcondición:** El producto queda pagado, apartado, y la Veterinaria recibe la orden.
+*   **Requisitos que realiza:** RF-005.
+
+**CU-04 · Administrar catálogo de productos**
+*   **Actor principal:** Veterinaria (Administrador).
+*   **Objetivo:** Dar de alta, dar de baja o actualizar precios y existencias.
+*   **Precondición:** La Veterinaria inició sesión con credenciales de administrador.
+*   **Escenario principal:**
+    1. La Veterinaria accede a "Gestión de Catálogo".
+    2. Selecciona "Agregar/Modificar Producto".
+    3. Ingresa o edita los datos (nombre, precio, stock, foto).
+    4. Presiona "Guardar cambios".
+    5. El sistema valida los datos y actualiza la vista pública.
+*   **Flujos alternos:**
+    *   **3a. Datos inconsistentes:** Ingresa un precio negativo. El sistema impide guardar y marca el campo con error.
+*   **Postcondición:** Base de datos actualizada y visible para clientes.
+*   **Requisitos que realiza:** Control de Acceso (Implícito), RF-005.
+
+**CU-05 · Suspender agenda por urgencia**
+*   **Actor principal:** Veterinaria (Administrador).
+*   **Objetivo:** Cancelar en bloque las citas restantes del día por urgencia médica en piso.
+*   **Precondición:** Sesión iniciada y citas programadas para las horas siguientes.
+*   **Escenario principal:**
+    1. La Veterinaria ingresa a la vista principal de la agenda del día.
+    2. Presiona "Suspender agenda del día".
+    3. El sistema despliega una alerta advirtiendo el número de citas afectadas.
+    4. La Veterinaria confirma la acción.
+    5. El sistema cambia a estatus "Cancelada por urgencia" todas las citas restantes.
+    6. El sistema envía automáticamente correos electrónicos a los clientes afectados.
+*   **Flujos alternos:**
+    *   **3a. Sin citas futuras:** El sistema detecta que ya no hay citas pendientes hoy, bloquea el botón y notifica.
+*   **Postcondición:** Agenda bloqueada por el resto del día y notificaciones enviadas.
+*   **Requisitos que realiza:** RF-003, RF-004.
+
+**CU-06 · Registrar perfil de mascota**
+*   **Actor principal:** Cliente (Dueño de mascota).
+*   **Objetivo:** Crear un expediente básico del animal para vincularlo a reservas.
+*   **Precondición:** Cliente con sesión iniciada.
+*   **Escenario principal:**
+    1. El Cliente accede a "Mis Mascotas" y selecciona "Agregar mascota".
+    2. El sistema muestra el formulario de registro.
+    3. El Cliente ingresa nombre, especie, raza y edad.
+    4. El sistema valida campos obligatorios.
+    5. El sistema vincula la mascota al cliente.
+*   **Flujos alternos:**
+    *   **4a. Campos faltantes:** El Cliente olvida la especie. El sistema detiene el registro y exige el dato.
+*   **Postcondición:** Mascota disponible para reservas.
+*   **Requisitos que realiza:** Estructura de base de datos relacional (Implícito).
+
+**CU-07 · Consultar agenda del día**
+*   **Actor principal:** Veterinaria (Administrador).
+*   **Objetivo:** Revisar la lista de pacientes y servicios de la fecha actual.
+*   **Precondición:** Sesión de administrador iniciada.
+*   **Escenario principal:**
+    1. La Veterinaria entra al sistema y selecciona la vista "Hoy".
+    2. El sistema recupera las citas ordenadas por hora.
+    3. El sistema muestra nombre del dueño, mascota y servicio programado.
+*   **Flujos alternos:**
+    *   **2a. Agenda vacía:** No hay citas programadas, el sistema muestra "Día libre de citas programadas".
+*   **Postcondición:** La Veterinaria tiene visibilidad de su carga de trabajo.
+*   **Requisitos que realiza:** Visualización de agenda (Implícito).
+
+**CU-08 · Consultar historial de citas**
+*   **Actor principal:** Cliente.
+*   **Objetivo:** Ver el registro de visitas pasadas de su mascota.
+*   **Precondición:** Sesión iniciada.
+*   **Escenario principal:**
+    1. El Cliente entra a "Mis Mascotas" y selecciona el perfil de un animal.
+    2. El sistema despliega una lista cronológica de las citas pasadas con estatus "Completado".
+*   **Flujos alternos:**
+    *   **2a. Sin historial:** La mascota es nueva y no tiene citas previas, el sistema indica "Aún no hay registros de visitas".
+*   **Postcondición:** El Cliente conoce las fechas de las atenciones previas.
+*   **Requisitos que realiza:** Consulta de información (Implícito).
+
+---
+
+## 6. Trazabilidad
+
+| Requisito | Origen | Caso de uso | Pantalla del prototipo | Estado |
+| :--- | :--- | :--- | :--- | :--- |
+| RF-001 | Entrevista 30 sep | CU-01 Agendar cita | Pantalla de Selección de Horario | Vigente |
+| RF-002 | Entrevista 30 sep | CU-01 Agendar cita (Flujo Alt 2a) | Pantalla de Selección de Servicio | Vigente |
+| RF-003 | Entrevista 30 sep | CU-05 Suspender agenda por urgencia | Pantalla del Administrador (Botón Pánico)| Vigente |
+| RF-004 | Supuesto propio | CU-05 Suspender agenda por urgencia | N/A (Proceso backend) | Vigente |
+| RF-005 | Entrevista 30 sep | CU-03 Comprar productos físicos | Pantalla de Checkout de Tienda | Vigente |
+| RNF-USA-001 | Derivado del sistema | CU-01 Agendar cita | Flujo completo de Nueva Cita | Vigente |
+| RNF-INT-001 | Entrevista 30 sep | CU-01 Agendar cita (Flujo Alt 6a)| Pantalla de Confirmación | Vigente |
+
+---
+
+## 7. Registro de cambios
+
+| Fecha | Requisito | Qué cambió | Por qué |
+| :--- | :--- | :--- | :--- |
+| 30/09/2026 | RF-001 | Tiempo de vacunación a 20 min | Confirmación en entrevista con Veterinaria |
+| 30/09/2026 | Alcance | Eliminación de entregas/paquetería | Confirmación en entrevista de recolección física |
+| 30/09/2026 | RF-003 | Se agregó requisito de botón de pánico | Hallazgo inesperado en entrevista sobre caos en urgencias |
