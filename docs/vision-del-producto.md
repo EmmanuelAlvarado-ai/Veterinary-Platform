@@ -53,7 +53,7 @@
 ### Explícitamente fuera del alcance
 
 - No gestiona expedientes clínicos detallados, historias médicas, ni almacenamiento de radiografías de las mascotas.
-- No controla el inventario físico de la clínica ni envía órdenes de reabastecimiento automáticas a proveedores.
+- No controla el inventario médico ni de insumos operativos de la clínica (jeringas, medicamentos de uso en consultorio). El control de existencias en el sistema se limita exclusivamente a los artículos publicados en el catálogo de venta en línea, y no emite órdenes de reabastecimiento a proveedores.
 - No procesa el cobro ni la facturación de las consultas médicas (el servicio médico se paga presencialmente en la clínica).
 - No gestiona envíos a domicilio ni cobro de paquetería para las compras en línea (la entrega de productos es estrictamente mediante recolección física en la clínica).
 - No almacena ni procesa directamente datos sensibles de tarjetas de crédito o débito. Toda la transacción financiera y la seguridad de los datos bancarios se delegan a la pasarela de pagos externa.
