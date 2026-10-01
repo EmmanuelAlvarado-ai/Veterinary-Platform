@@ -368,3 +368,6 @@ El cliente quiere la máxima flexibilidad quiere poder cancelar su cita 5 minuto
 | 30/09/2026 | Alcance y CU-03 | Clarificación de control de existencias de catálogo vs. inventario médico | Corrección de contradicción detectada en inspección de requisitos |
 | 30/09/2026 | RF-006 | Se agregó requisito funcional de recordatorios | Para cubrir la promesa hecha en el Alcance del sistema |
 | 30/09/2026 | RF-007 a RF-010 | Se agregaron cuatro requisitos funcionales adicionales | Formalización de reglas de negocio ya descritas en los Casos de Uso para alcanzar el umbral mínimo de diseño |
+
+
+**Link al Figma:**  https://canon-nebula-65162367.figma.site/citas
