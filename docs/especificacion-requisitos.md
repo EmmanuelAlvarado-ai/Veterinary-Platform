@@ -12,10 +12,19 @@
 Especificar los requisitos funcionales y no funcionales, así como los casos de uso principales para la construcción de la Plataforma LavinPets, sirviendo como guía verificable para el diseño, desarrollo y validación del sistema.
 
 **Alcance del sistema:**  
-El sistema registra citas médicas y estéticas, calculando dinámicamente y bloqueando el tiempo en la agenda según el servicio. Permite al administrador suspender citas en bloque por urgencias, disparando avisos automáticos. Envía recordatorios de citas 24 horas antes y procesa la compra y el cobro en línea de productos físicos mediante una pasarela de pagos externa.
+- Registra citas médicas y servicios estéticos asociándolos a un cliente y su mascota.
+- Bloquea horarios en el calendario de la veterinaria automáticamente, dependiendo de la duración específica de cada tipo de servicio.
+- Procesa compras y el cobro en línea de productos físicos mediante la integración con una pasarela de pagos externa (ej. Stripe o Mercado Pago).
+- Envía notificaciones automáticas de recordatorio (vía WhatsApp o SMS) a los clientes 24 horas antes de su cita.
+- Autentica a tres tipos de usuarios con permisos distintos (Cliente, Veterinaria, Soporte Técnico).
+- Permite a la Veterinaria cancelar o suspender en bloque las citas del resto del día con un solo botón en caso de urgencia médica, disparando notificaciones de reagendación automáticas a los clientes afectados.
 
 **Fuera del alcance:**  
-No gestiona expedientes clínicos, no controla inventarios físicos de la clínica ni emite órdenes a proveedores. No procesa cobros ni facturación de servicios médicos (se pagan presencialmente). No gestiona envíos a domicilio para la tienda en línea (la entrega es estrictamente recolección en tienda).
+- No gestiona expedientes clínicos detallados, historias médicas, ni almacenamiento de radiografías de las mascotas.
+- No controla el inventario médico ni de insumos operativos de la clínica (jeringas, medicamentos de uso en consultorio). El control de existencias en el sistema se limita exclusivamente a los artículos publicados en el catálogo de venta en línea, y no emite órdenes de reabastecimiento a proveedores.
+- No procesa el cobro ni la facturación de las consultas médicas (el servicio médico se paga presencialmente en la clínica).
+- No gestiona envíos a domicilio ni cobro de paquetería para las compras en línea (la entrega de productos es estrictamente mediante recolección física en la clínica).
+- No almacena ni procesa directamente datos sensibles de tarjetas de crédito o débito. Toda la transacción financiera y la seguridad de los datos bancarios se delegan a la pasarela de pagos externa.
 
 ---
 
@@ -23,12 +32,12 @@ No gestiona expedientes clínicos, no controla inventarios físicos de la clíni
 
 | Usuario | Qué hace hoy sin el sistema | Qué espera del sistema |
 | :--- | :--- | :--- |
-| **Cliente (Dueño de mascota)** | Llama o manda WhatsApp (a veces de madrugada) para agendar. Va físicamente a la clínica si quiere comprar un accesorio. | Poder ver horarios libres, agendar citas en cualquier momento desde su celular, y comprar productos en línea para solo pasar a recogerlos. |
-| **Veterinaria (Administrador)** | Anota citas en libreta, a veces olvida registrarlas o mandar recordatorios. En urgencias, no tiene tiempo de avisar a los clientes y se genera caos. | Una agenda automatizada que evite empalmes, recordatorios automáticos para no perder ingresos, y un "botón de pánico" para reaccionar ante urgencias. |
-| **Soporte Técnico** | N/A (Nuevo rol en el sistema) | Acceso a configuraciones maestras para dar mantenimiento y solucionar errores de plataforma. |
+| **Dueño de mascota (Cliente)** | Tienen que llamar por teléfono o mandar mensajes de WhatsApp en horarios de atención para agendar una cita o preguntar por la existencia de productos. | Poder ver horarios disponibles, agendar citas rápido, elegir el tipo de servicio y comprar productos desde su celular 24/7. |
+| **Veterinaria (Administrador)** | Anota las citas en una libreta, y tiene que acordarse de mandar mensajes de texto manualmente un día antes para que los clientes no falten. | Subir productos nuevos, ver una agenda que se llene sola, recibir alertas de compra y que el sistema mande recordatorios automáticos. |
+| **Soporte Técnico (Superusuario)** | N/A | Acceso total a bases de datos, código y configuraciones maestras para dar mantenimiento, instalar actualizaciones y solucionar errores. |
 
 **Conflictos identificados entre usuarios:**  
-El cliente desea flexibilidad total para agendar o presentarse con múltiples mascotas a la vez; la Veterinaria necesita control estricto del tiempo (cada mascota un bloque) y prohíbe las cancelaciones de última hora para no perder dinero.
+El cliente quiere la máxima flexibilidad quiere poder cancelar su cita 5 minutos antes si le surge un imprevisto. Sin embargo, a la veterinaria esto le estorba porque pierde ese bloque de tiempo, dinero y la oportunidad de atender a otro paciente.
 
 ---
 
@@ -99,7 +108,7 @@ El cliente desea flexibilidad total para agendar o presentarse con múltiples ma
 *   **Atributo de calidad:** Usabilidad.
 *   **Descripción:** Un usuario tipo Cliente completa el flujo de agendar una cita en un máximo de cuatro clics desde la pantalla principal.
 *   **Métrica:** Número absoluto de clics u toques en pantalla (máximo 4) para un paciente previamente registrado.
-*   **Origen:** Derivado del tipo de sistema (B2C Web).
+*   **Origen:** Derivado del tipo de sistema.
 *   **Prioridad:** Imprescindible.
 *   **Por qué importa:** Si el sistema es más largo o confuso que mandar un WhatsApp, los clientes lo abandonarán y seguirán saturando el teléfono de la clínica de madrugada.
 *   **Afecta a:** RF-001.
@@ -117,7 +126,7 @@ El cliente desea flexibilidad total para agendar o presentarse con múltiples ma
 *   **Atributo de calidad:** Disponibilidad.
 *   **Descripción:** El portal de agendamiento y catálogo está accesible el 99.9% del tiempo fuera de ventanas de mantenimiento programadas.
 *   **Métrica:** Porcentaje de tiempo de actividad mensual medido por herramientas de monitoreo.
-*   **Origen:** Derivado del tipo de sistema (SaaS).
+*   **Origen:** Derivado del tipo de sistema.
 *   **Prioridad:** Importante.
 *   **Por qué importa:** El mayor dolor de la veterinaria son los mensajes a las 11:00 PM. El sistema existe para operar justamente cuando la clínica física está cerrada.
 *   **Afecta a:** N/A.
@@ -126,7 +135,6 @@ El cliente desea flexibilidad total para agendar o presentarse con múltiples ma
 
 ## 5. Casos de uso
 
-*(Nota: El diagrama visual de casos de uso `casos-de-uso.png` con la notación UML (actores externos, casos de uso internos y asociaciones) se encuentra en la carpeta `docs/diagramas/` del repositorio).*
 
 ### Lista de Casos de Uso del Sistema
 1. **CU-01:** Agendar cita de servicio
@@ -182,10 +190,10 @@ El cliente desea flexibilidad total para agendar o presentarse con múltiples ma
 *   **Precondición:** El Cliente tiene artículos agregados en su carrito de compras.
 *   **Escenario principal:**
     1. El Cliente abre el carrito y presiona "Proceder al pago".
-    2. El sistema verifica la existencia en inventario de cada producto.
+    2. El sistema verifica las existencias disponibles en el catálogo en línea para cada producto.
     3. El sistema redirige al Cliente a la pasarela de pagos externa.
     4. La pasarela confirma la transacción exitosa al sistema.
-    5. El sistema genera el comprobante de compra con estatus "Pendiente de recolección en tienda" y resta el inventario.
+    5. El sistema genera el comprobante de compra con estatus "Pendiente de recolección en tienda" y resta la cantidad comprada de las existencias del catálogo.
 *   **Flujos alternos:**
     *   **2a. Falta de stock (Empalme físico):** El sistema detecta que el producto se agotó físicamente. Bloquea el cobro y pide al Cliente sacarlo del carrito.
     *   **4a. Pago declinado:** La pasarela rechaza la tarjeta. El sistema regresa al Cliente a la pantalla de pago mostrando el error de la pasarela.
