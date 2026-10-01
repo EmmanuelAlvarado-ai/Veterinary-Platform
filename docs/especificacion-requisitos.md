@@ -53,6 +53,10 @@ El cliente quiere la máxima flexibilidad quiere poder cancelar su cita 5 minuto
 | RF-004 | Notificación de cancelación masiva | Importante | Supuesto derivado de RF-003 |
 | RF-005 | Restricción de cobro a productos | Imprescindible | Entrevista (confirmado) |
 | RF-006 | Recordatorio automático de cita | Imprescindible | Entrevista (dolor del negocio) |
+| RF-007 | Restricción de cancelación por tiempo | Imprescindible | Entrevista (confirmado) |
+| RF-008 | Bloqueo individual por mascota | Importante | Entrevista (confirmado) |
+| RF-009 | Deducción automática de stock | Imprescindible | Derivado de CU-03 |
+| RF-010 | Control de acceso a catálogo | Imprescindible | Derivado de CU-04 |
 
 ### 3.2 Fichas
 
@@ -98,6 +102,34 @@ El cliente quiere la máxima flexibilidad quiere poder cancelar su cita 5 minuto
 *   **Prioridad:** Imprescindible.
 *   **Criterio de aceptación:** Si una cita está agendada para el jueves a las 16:00, el sistema dispara la notificación el miércoles a las 16:00 sin intervención humana.
 *   **Relacionado con:** Regla de Negocio 2 (Política de 24 horas).
+
+**RF-007 · Restricción de cancelación por tiempo**
+*   **Descripción:** El sistema bloquea la opción de cancelar una cita en el portal del Cliente si la diferencia entre la hora actual y la hora programada es menor a 24 horas.
+*   **Origen:** Entrevista con la dueña, 30 de septiembre (Regla para evitar pérdidas por inasistencia).
+*   **Prioridad:** Imprescindible.
+*   **Criterio de aceptación:** Un cliente intenta cancelar el miércoles a las 11:00 AM una cita programada para el jueves a las 09:00 AM. El sistema oculta el botón de cancelar y muestra el texto: "Cancelación no disponible con menos de 24 horas".
+*   **Relacionado con:** CU-02.
+
+**RF-008 · Bloqueo individual por mascota**
+*   **Descripción:** El sistema impide asignar más de un perfil de mascota a un mismo bloque de tiempo durante el proceso de reserva.
+*   **Origen:** Entrevista con la dueña, 30 de septiembre (Corrección sobre citas múltiples).
+*   **Prioridad:** Importante.
+*   **Criterio de aceptación:** El cliente selecciona dos perros en el formulario de la cita. El botón de confirmar se deshabilita y aparece una alerta indicando que debe reservar un espacio por cada mascota.
+*   **Relacionado con:** RF-001, CU-01.
+
+**RF-009 · Deducción automática de stock**
+*   **Descripción:** El sistema descuenta de las existencias del catálogo en línea la cantidad exacta de artículos comprados en cuanto la pasarela de pago confirma la transacción exitosa.
+*   **Origen:** Supuesto derivado del flujo de compras web (CU-03).
+*   **Prioridad:** Imprescindible.
+*   **Criterio de aceptación:** Se compran 2 bultos de croquetas. Al recibir el "OK" de la pasarela, el stock del producto en la base de datos baja inmediatamente de 10 a 8.
+*   **Relacionado con:** RF-005.
+
+**RF-010 · Control de acceso a catálogo**
+*   **Descripción:** El sistema restringe el acceso a la vista de agregar, editar o eliminar productos del catálogo exclusivamente a los usuarios autenticados con rol de Administrador.
+*   **Origen:** Supuesto de seguridad del sistema (CU-04).
+*   **Prioridad:** Imprescindible.
+*   **Criterio de aceptación:** Un usuario tipo Cliente ingresa manualmente la URL de gestión de catálogo. El sistema rechaza la petición y lo redirige a la página principal mostrando el error "Acceso denegado".
+*   **Relacionado con:** N/A.
 
 ---
 
@@ -295,6 +327,10 @@ El cliente quiere la máxima flexibilidad quiere poder cancelar su cita 5 minuto
 | RNF-USA-001 | Derivado del sistema | CU-01 Agendar cita | Flujo completo de Nueva Cita | Vigente |
 | RNF-INT-001 | Entrevista 30 sep | CU-01 Agendar cita (Flujo Alt 6a)| Pantalla de Confirmación | Vigente |
 | RNF-DIS-001 | Derivado del sistema | Todos los Casos de Uso (Global) | N/A (Infraestructura) | Vigente |
+| RF-007 | Entrevista 30 sep | CU-02 Cancelar cita programada | Pantalla de Mis Citas | Vigente |
+| RF-008 | Entrevista 30 sep | CU-01 Agendar cita (Flujo Alt 4a) | Pantalla de Selección de Servicio | Vigente |
+| RF-009 | Derivado de CU-03 | CU-03 Comprar productos físicos | N/A (Proceso backend) | Vigente |
+| RF-010 | Derivado de CU-04 | CU-04 Administrar catálogo | Pantalla de Gestión de Catálogo | Vigente |
 
 ---
 
@@ -307,3 +343,4 @@ El cliente quiere la máxima flexibilidad quiere poder cancelar su cita 5 minuto
 | 30/09/2026 | RF-003 | Se agregó requisito de botón de pánico | Hallazgo inesperado en entrevista sobre caos en urgencias |
 | 30/09/2026 | Alcance y CU-03 | Clarificación de control de existencias de catálogo vs. inventario médico | Corrección de contradicción detectada en inspección de requisitos |
 | 30/09/2026 | RF-006 | Se agregó requisito funcional de recordatorios | Para cubrir la promesa hecha en el Alcance del sistema |
+| 30/09/2026 | RF-007 a RF-010 | Se agregaron cuatro requisitos funcionales adicionales | Formalización de reglas de negocio ya descritas en los Casos de Uso para alcanzar el umbral mínimo de diseño |
