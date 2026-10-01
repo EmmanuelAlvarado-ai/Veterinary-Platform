@@ -348,13 +348,14 @@ El cliente quiere la máxima flexibilidad quiere poder cancelar su cita 5 minuto
 | RF-004 | Supuesto propio | CU-05 Suspender agenda por urgencia | N/A (Proceso backend) | Vigente |
 | RF-005 | Entrevista 30 sep | CU-03 Comprar productos físicos | Pantalla de Checkout de Tienda | Vigente |
 | RF-006 | Entrevista 30 sep | N/A (Proceso automático) | N/A (Proceso backend) | Vigente |
-| RNF-USA-001 | Derivado del sistema | CU-01 Agendar cita | Flujo completo de Nueva Cita | Vigente |
-| RNF-INT-001 | Entrevista 30 sep | CU-01 Agendar cita (Flujo Alt 6a)| Pantalla de Confirmación | Vigente |
-| RNF-DIS-001 | Derivado del sistema | Todos los Casos de Uso (Global) | N/A (Infraestructura) | Vigente |
 | RF-007 | Entrevista 30 sep | CU-02 Cancelar cita programada | Pantalla de Mis Citas | Vigente |
 | RF-008 | Entrevista 30 sep | CU-01 Agendar cita (Flujo Alt 4a) | Pantalla de Selección de Servicio | Vigente |
 | RF-009 | Derivado de CU-03 | CU-03 Comprar productos físicos | N/A (Proceso backend) | Vigente |
 | RF-010 | Derivado de CU-04 | CU-04 Administrar catálogo | Pantalla de Gestión de Catálogo | Vigente |
+| RNF-USA-001 | Derivado del sistema | CU-01 Agendar cita | Flujo completo de Nueva Cita | Vigente |
+| RNF-INT-001 | Entrevista 30 sep | CU-01 Agendar cita (Flujo Alt 6a)| Pantalla de Confirmación | Vigente |
+| RNF-DIS-001 | Derivado del sistema | Todos los Casos de Uso (Global) | N/A (Infraestructura) | Vigente |
+
 
 ---
 
