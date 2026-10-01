@@ -2,7 +2,7 @@
 
 **Sistema:** Plataforma LavinPets  
 **Autor:** Noé Emmanuel Alvarado Ríos  
-**Fecha de la última actualización:** 30/09/2026  
+**Fecha de la última actualización:** 01/10/2026  
 
 ---
 
