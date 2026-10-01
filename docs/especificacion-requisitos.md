@@ -60,76 +60,95 @@ El cliente quiere la máxima flexibilidad quiere poder cancelar su cita 5 minuto
 
 ### 3.2 Fichas
 
-**RF-001 · Bloqueo dinámico de agenda**
-*   **Descripción:** El sistema bloquea el tiempo en la agenda dependiendo del servicio: 20 minutos para "Vacunación" y 60 minutos para "Estética".
-*   **Origen:** Entrevista con la dueña, 30 de septiembre (Regla ajustada).
-*   **Prioridad:** Imprescindible.
-*   **Criterio de aceptación:** Al guardar una cita de "Vacunación" a las 10:00 AM, el sistema muestra el horario de 10:00 a 10:20 ocupado. Al guardar "Estética", ocupa de 10:00 a 11:00 AM.
-*   **Relacionado con:** RNF-INT-001.
+**RF-001 - Bloqueo dinámico de agenda**
+| Campo | Contenido |
+| :--- | :--- |
+| **Descripción** | El sistema bloquea el tiempo en la agenda dependiendo del servicio: 20 minutos para "Vacunación" y 60 minutos para "Estética". |
+| **Origen** | Entrevista con la dueña, 30 de septiembre (Regla ajustada). |
+| **Prioridad** | Imprescindible |
+| **Criterio de aceptación** | - Al guardar una cita de "Vacunación" a las 10:00 AM, el sistema muestra el horario de 10:00 a 10:20 ocupado.<br>- Al guardar "Estética", ocupa de 10:00 a 11:00 AM. |
+| **Relacionado con** | RNF-INT-001 |
 
-**RF-002 · Restricción de cirugías web**
-*   **Descripción:** El sistema impide que un usuario tipo Cliente agende el servicio "Cirugía" de manera directa.
-*   **Origen:** Entrevista con la dueña, 30 de septiembre (Confirmado).
-*   **Prioridad:** Imprescindible.
-*   **Criterio de aceptación:** Al intentar seleccionar "Cirugía" en el catálogo de servicios web, el botón de confirmar se deshabilita y se muestra el mensaje: "Requiere agendar Revisión General previa".
-*   **Relacionado con:** N/A.
+**RF-002 - Restricción de cirugías web**
+| Campo | Contenido |
+| :--- | :--- |
+| **Descripción** | El sistema impide que un usuario tipo Cliente agende el servicio "Cirugía" de manera directa. |
+| **Origen** | Entrevista con la dueña, 30 de septiembre (Confirmado). |
+| **Prioridad** | Imprescindible |
+| **Criterio de aceptación** | - Al intentar seleccionar "Cirugía" en el catálogo de servicios web, el botón de confirmar se deshabilita y se muestra el mensaje: "Requiere agendar Revisión General previa". |
+| **Relacionado con** | N/A |
 
-**RF-003 · Suspensión de agenda por urgencia**
-*   **Descripción:** El sistema cambia a estado "Cancelado" todas las citas posteriores a la hora actual en el día en curso al presionar el botón de suspensión de urgencia.
-*   **Origen:** Entrevista con la dueña, 30 de septiembre (Hallazgo inesperado).
-*   **Prioridad:** Importante.
-*   **Criterio de aceptación:** Si son las 2:00 PM y el administrador presiona la suspensión, todas las citas entre las 2:01 PM y el cierre del día cambian su estado a cancelado en un solo clic.
-*   **Relacionado con:** RF-004.
+**RF-003 - Suspensión de agenda por urgencia**
+| Campo | Contenido |
+| :--- | :--- |
+| **Descripción** | El sistema cambia a estado "Cancelado" todas las citas posteriores a la hora actual en el día en curso al presionar el botón de suspensión de urgencia. |
+| **Origen** | Entrevista con la dueña, 30 de septiembre (Hallazgo inesperado). |
+| **Prioridad** | Importante |
+| **Criterio de aceptación** | - Si son las 2:00 PM y el administrador presiona la suspensión, todas las citas entre las 2:01 PM y el cierre del día cambian su estado a cancelado en un solo clic. |
+| **Relacionado con** | RF-004 |
 
-**RF-004 · Notificación de cancelación masiva**
-*   **Descripción:** El sistema envía un correo electrónico y un mensaje de WhatsApp de aviso de reagendación a los clientes cuyas citas fueron afectadas por la suspensión de urgencia.
-*   **Origen:** Supuesto propio derivado de la necesidad de urgencias.
-*   **Prioridad:** Importante.
-*   **Criterio de aceptación:** Al ejecutarse el RF-003, el sistema despacha correos y mensajes a los contactos registrados de los afectados en un máximo de 2 minutos.
-*   **Relacionado con:** RF-003, RNF-REN-001.
+**RF-004 - Notificación de cancelación masiva**
+| Campo | Contenido |
+| :--- | :--- |
+| **Descripción** | El sistema envía un correo electrónico y un mensaje de WhatsApp de aviso de reagendación a los clientes cuyas citas fueron afectadas por la suspensión de urgencia. |
+| **Origen** | Supuesto propio derivado de la necesidad de urgencias. |
+| **Prioridad** | Importante |
+| **Criterio de aceptación** | - Al ejecutarse el RF-003, el sistema despacha correos y mensajes a los contactos registrados de los afectados en un máximo de 2 minutos. |
+| **Relacionado con** | RF-003, RNF-REN-001 |
 
+**RF-005 - Restricción de cobro a productos**
+| Campo | Contenido |
+| :--- | :--- |
+| **Descripción** | El sistema procesa pagos en línea exclusivamente para los carritos que contienen artículos del catálogo de productos físicos. |
+| **Origen** | Entrevista con la dueña, 30 de septiembre (Confirmado). |
+| **Prioridad** | Imprescindible |
+| **Criterio de aceptación** | - Si el usuario tiene una consulta en el carrito, el flujo salta a "Confirmar cita" sin pedir tarjeta.<br>- Si tiene croquetas, el sistema exige el pago mediante la pasarela antes de confirmar el pedido. |
+| **Relacionado con** | N/A |
 
-**RF-005 · Restricción de cobro a productos**
-*   **Descripción:** El sistema procesa pagos en línea exclusivamente para los carritos que contienen artículos del catálogo de productos físicos.
-*   **Origen:** Entrevista con la dueña, 30 de septiembre (Confirmado).
-*   **Prioridad:** Imprescindible.
-*   **Criterio de aceptación:** Si el usuario tiene una consulta en el carrito, el flujo salta a "Confirmar cita" sin pedir tarjeta. Si tiene croquetas, el sistema exige el pago mediante la pasarela antes de confirmar el pedido.
-*   **Relacionado con:** N/A.
+**RF-006 - Recordatorio automático de cita**
+| Campo | Contenido |
+| :--- | :--- |
+| **Descripción** | El sistema envía una notificación de recordatorio (vía WhatsApp o SMS) al Cliente exactamente 24 horas antes de la hora programada para su cita. |
+| **Origen** | Entrevista con la dueña, 30 de septiembre (Confirmado - Dolor principal). |
+| **Prioridad** | Imprescindible |
+| **Criterio de aceptación** | - Si una cita está agendada para el jueves a las 16:00, el sistema dispara la notificación el miércoles a las 16:00 sin intervención humana. |
+| **Relacionado con** | Regla de Negocio 2 (Política de 24 horas) |
 
-**RF-006 · Recordatorio automático de cita**
-*   **Descripción:** El sistema envía una notificación de recordatorio (vía WhatsApp o SMS) al Cliente exactamente 24 horas antes de la hora programada para su cita.
-*   **Origen:** Entrevista con la dueña, 30 de septiembre (Confirmado - Dolor principal).
-*   **Prioridad:** Imprescindible.
-*   **Criterio de aceptación:** Si una cita está agendada para el jueves a las 16:00, el sistema dispara la notificación el miércoles a las 16:00 sin intervención humana.
-*   **Relacionado con:** Regla de Negocio 2 (Política de 24 horas).
+**RF-007 - Restricción de cancelación por tiempo**
+| Campo | Contenido |
+| :--- | :--- |
+| **Descripción** | El sistema bloquea la option de cancelar una cita en el portal del Cliente si la diferencia entre la hora actual y la hora programada es menor a 24 horas. |
+| **Origen** | Entrevista con la dueña, 30 de septiembre (Regla para evitar pérdidas por inasistencia). |
+| **Prioridad** | Imprescindible |
+| **Criterio de aceptación** | - Un cliente intenta cancelar el miércoles a las 11:00 AM una cita programada para el jueves a las 09:00 AM. El sistema oculta el botón de cancelar y muestra el texto: "Cancelación no disponible con menos de 24 horas". |
+| **Relacionado con** | CU-02 |
 
-**RF-007 · Restricción de cancelación por tiempo**
-*   **Descripción:** El sistema bloquea la opción de cancelar una cita en el portal del Cliente si la diferencia entre la hora actual y la hora programada es menor a 24 horas.
-*   **Origen:** Entrevista con la dueña, 30 de septiembre (Regla para evitar pérdidas por inasistencia).
-*   **Prioridad:** Imprescindible.
-*   **Criterio de aceptación:** Un cliente intenta cancelar el miércoles a las 11:00 AM una cita programada para el jueves a las 09:00 AM. El sistema oculta el botón de cancelar y muestra el texto: "Cancelación no disponible con menos de 24 horas".
-*   **Relacionado con:** CU-02.
+**RF-008 - Bloqueo individual por mascota**
+| Campo | Contenido |
+| :--- | :--- |
+| **Descripción** | El sistema impide asignar más de un perfil de mascota a un mismo bloque de tiempo durante el proceso de reserva. |
+| **Origen** | Entrevista con la dueña, 30 de septiembre (Corrección sobre citas múltiples). |
+| **Prioridad** | Importante |
+| **Criterio de aceptación** | - El cliente selecciona dos perros en el formulario de la cita. El botón de confirmar se deshabilita y aparece una alerta indicando que debe reservar un espacio por cada mascota. |
+| **Relacionado con** | RF-001, CU-01 |
 
-**RF-008 · Bloqueo individual por mascota**
-*   **Descripción:** El sistema impide asignar más de un perfil de mascota a un mismo bloque de tiempo durante el proceso de reserva.
-*   **Origen:** Entrevista con la dueña, 30 de septiembre (Corrección sobre citas múltiples).
-*   **Prioridad:** Importante.
-*   **Criterio de aceptación:** El cliente selecciona dos perros en el formulario de la cita. El botón de confirmar se deshabilita y aparece una alerta indicando que debe reservar un espacio por cada mascota.
-*   **Relacionado con:** RF-001, CU-01.
+**RF-009 - Deducción automática de stock**
+| Campo | Contenido |
+| :--- | :--- |
+| **Descripción** | El sistema descuenta de las existencias del catálogo en línea la cantidad exacta de artículos comprados en cuanto la pasarela de pago confirma la transacción exitosa. |
+| **Origen** | Supuesto derivado del flujo de compras web (CU-03). |
+| **Prioridad** | Imprescindible |
+| **Criterio de aceptación** | - Se compran 2 bultos de croquetas. Al recibir el "OK" de la pasarela, el stock del producto en la base de datos baja inmediatamente de 10 a 8. |
+| **Relacionado con** | RF-005 |
 
-**RF-009 · Deducción automática de stock**
-*   **Descripción:** El sistema descuenta de las existencias del catálogo en línea la cantidad exacta de artículos comprados en cuanto la pasarela de pago confirma la transacción exitosa.
-*   **Origen:** Supuesto derivado del flujo de compras web (CU-03).
-*   **Prioridad:** Imprescindible.
-*   **Criterio de aceptación:** Se compran 2 bultos de croquetas. Al recibir el "OK" de la pasarela, el stock del producto en la base de datos baja inmediatamente de 10 a 8.
-*   **Relacionado con:** RF-005.
-
-**RF-010 · Control de acceso a catálogo**
-*   **Descripción:** El sistema restringe el acceso a la vista de agregar, editar o eliminar productos del catálogo exclusivamente a los usuarios autenticados con rol de Administrador.
-*   **Origen:** Supuesto de seguridad del sistema (CU-04).
-*   **Prioridad:** Imprescindible.
-*   **Criterio de aceptación:** Un usuario tipo Cliente ingresa manualmente la URL de gestión de catálogo. El sistema rechaza la petición y lo redirige a la página principal mostrando el error "Acceso denegado".
-*   **Relacionado con:** N/A.
+**RF-010 - Control de acceso a catálogo**
+| Campo | Contenido |
+| :--- | :--- |
+| **Descripción** | El sistema restringe el acceso a la vista de agregar, editar o eliminar productos del catálogo exclusivamente a los usuarios autenticados con rol de Administrador. |
+| **Origen** | Supuesto de seguridad del sistema (CU-04). |
+| **Prioridad** | Imprescindible |
+| **Criterio de aceptación** | - Un usuario tipo Cliente ingresa manualmente la URL de gestión de catálogo. El sistema rechaza la petición y lo redirige a la página principal mostrando el error "Acceso denegado". |
+| **Relacionado con** | N/A |
 
 ---
 
@@ -145,33 +164,38 @@ El cliente quiere la máxima flexibilidad quiere poder cancelar su cita 5 minuto
 
 ### 4.2 Fichas
 
-**RNF-USA-001 · Límite de clics para agendar**
-*   **Atributo de calidad:** Usabilidad.
-*   **Descripción:** Un usuario tipo Cliente completa el flujo de agendar una cita en un máximo de cuatro clics desde la pantalla principal.
-*   **Métrica:** Número absoluto de clics u toques en pantalla (máximo 4) para un paciente previamente registrado.
-*   **Origen:** Derivado del tipo de sistema.
-*   **Prioridad:** Imprescindible.
-*   **Por qué importa:** Si el sistema es más largo o confuso que mandar un WhatsApp, los clientes lo abandonarán y seguirán saturando el teléfono de la clínica de madrugada.
-*   **Afecta a:** RF-001.
+**RNF-USA-001 - Límite de clics para agendar**
+| Campo | Contenido |
+| :--- | :--- |
+| **Atributo de calidad** | Usabilidad |
+| **Descripción** | Un usuario tipo Cliente completa el flujo de agendar una cita en un máximo de cuatro clics desde la pantalla principal. |
+| **Métrica** | Número absoluto de clics u toques en pantalla (máximo 4) para un paciente previamente registrado. |
+| **Origen** | Derivado del tipo de sistema. |
+| **Prioridad** | Imprescindible |
+| **Por qué importa** | Si el sistema es más largo o confuso que mandar un WhatsApp, los clientes lo abandonarán y seguirán saturando el teléfono de la clínica de madrugada. |
+| **Afecta a** | RF-001 |
 
-**RNF-INT-001 · Prevención de empalmes concurrentes**
-*   **Atributo de calidad:** Integridad de los datos.
-*   **Descripción:** El sistema rechaza las peticiones concurrentes para el mismo bloque de horario con un tiempo de respuesta menor a 2 segundos.
-*   **Métrica:** Tiempo de validación de disponibilidad en base de datos al momento de guardar (menor a 2000 ms).
-*   **Origen:** Entrevista (las citas duplicadas o mal anotadas generan caos en piso).
-*   **Prioridad:** Imprescindible.
-*   **Por qué importa:** Al ser un entorno web, dos dueños pueden dar clic al mismo tiempo. Si el sistema guarda ambas, habrá dos pacientes para un solo consultorio.
-*   **Afecta a:** RF-001.
+**RNF-INT-001 - Prevención de empalmes concurrentes**
+| Campo | Contenido |
+| :--- | :--- |
+| **Atributo de calidad** | Integridad de los datos |
+| **Descripción** | El sistema rechaza las peticiones concurrentes para el mismo bloque de horario con un tiempo de respuesta menor a 2 segundos. |
+| **Métrica** | Tiempo de validación de disponibilidad en base de datos al momento de guardar (menor a 2000 ms). |
+| **Origen** | Entrevista (las citas duplicadas o mal anotadas generan caos en piso). |
+| **Prioridad** | Imprescindible |
+| **Por qué importa** | Al ser un entorno web, dos dueños pueden dar clic al mismo tiempo. Si el sistema guarda ambas, habrá dos pacientes para un solo consultorio. |
+| **Afecta a** | RF-001 |
 
-**RNF-DIS-001 · Uptime del portal web**
-*   **Atributo de calidad:** Disponibilidad.
-*   **Descripción:** El portal de agendamiento y catálogo está accesible el 99.9% del tiempo fuera de ventanas de mantenimiento programadas.
-*   **Métrica:** Porcentaje de tiempo de actividad mensual medido por herramientas de monitoreo.
-*   **Origen:** Derivado del tipo de sistema.
-*   **Prioridad:** Importante.
-*   **Por qué importa:** El mayor dolor de la veterinaria son los mensajes a las 11:00 PM. El sistema existe para operar justamente cuando la clínica física está cerrada.
-*   **Afecta a:** N/A.
-
+**RNF-DIS-001 - Uptime del portal web**
+| Campo | Contenido |
+| :--- | :--- |
+| **Atributo de calidad** | Disponibilidad |
+| **Descripción** | El portal de agendamiento y catálogo está accesible el 99.9% del tiempo fuera de ventanas de mantenimiento programadas. |
+| **Métrica** | Porcentaje de tiempo de actividad mensual medido por herramientas de monitoreo. |
+| **Origen** | Derivado del tipo de sistema. |
+| **Prioridad** | Importante |
+| **Por qué importa** | El mayor dolor de la veterinaria son los mensajes a las 11:00 PM. El sistema existe para operar justamente cuando la clínica física está cerrada. |
+| **Afecta a** | N/A |
 ---
 
 ## 5. Casos de uso
