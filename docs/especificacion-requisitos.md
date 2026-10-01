@@ -169,7 +169,7 @@ El cliente quiere la máxima flexibilidad quiere poder cancelar su cita 5 minuto
 | :--- | :--- |
 | **Atributo de calidad** | Usabilidad |
 | **Descripción** | Un usuario tipo Cliente completa el flujo de agendar una cita en un máximo de cuatro clics desde la pantalla principal. |
-| **Métrica** | Número absoluto de clics u toques en pantalla (máximo 4) para un paciente previamente registrado. |
+| **Métrica** | Número absoluto de clics u toques en pantalla (máximo 6) para un paciente previamente registrado. |
 | **Origen** | Derivado del tipo de sistema. |
 | **Prioridad** | Imprescindible |
 | **Por qué importa** | Si el sistema es más largo o confuso que mandar un WhatsApp, los clientes lo abandonarán y seguirán saturando el teléfono de la clínica de madrugada. |
