@@ -52,6 +52,7 @@ El cliente quiere la máxima flexibilidad quiere poder cancelar su cita 5 minuto
 | RF-003 | Suspensión de agenda por urgencia | Importante | Entrevista (hallazgo inesperado) |
 | RF-004 | Notificación de cancelación masiva | Importante | Supuesto derivado de RF-003 |
 | RF-005 | Restricción de cobro a productos | Imprescindible | Entrevista (confirmado) |
+| RF-006 | Recordatorio automático de cita | Imprescindible | Entrevista (dolor del negocio) |
 
 ### 3.2 Fichas
 
@@ -77,11 +78,12 @@ El cliente quiere la máxima flexibilidad quiere poder cancelar su cita 5 minuto
 *   **Relacionado con:** RF-004.
 
 **RF-004 · Notificación de cancelación masiva**
-*   **Descripción:** El sistema envía un correo electrónico de aviso de reagendación a los clientes cuyas citas fueron afectadas por la suspensión de urgencia.
+*   **Descripción:** El sistema envía un correo electrónico y un mensaje de WhatsApp de aviso de reagendación a los clientes cuyas citas fueron afectadas por la suspensión de urgencia.
 *   **Origen:** Supuesto propio derivado de la necesidad de urgencias.
 *   **Prioridad:** Importante.
-*   **Criterio de aceptación:** Al ejecutarse el RF-003, el sistema despacha correos a las direcciones registradas de los afectados en un máximo de 2 minutos.
+*   **Criterio de aceptación:** Al ejecutarse el RF-003, el sistema despacha correos y mensajes a los contactos registrados de los afectados en un máximo de 2 minutos.
 *   **Relacionado con:** RF-003, RNF-REN-001.
+
 
 **RF-005 · Restricción de cobro a productos**
 *   **Descripción:** El sistema procesa pagos en línea exclusivamente para los carritos que contienen artículos del catálogo de productos físicos.
@@ -89,6 +91,13 @@ El cliente quiere la máxima flexibilidad quiere poder cancelar su cita 5 minuto
 *   **Prioridad:** Imprescindible.
 *   **Criterio de aceptación:** Si el usuario tiene una consulta en el carrito, el flujo salta a "Confirmar cita" sin pedir tarjeta. Si tiene croquetas, el sistema exige el pago mediante la pasarela antes de confirmar el pedido.
 *   **Relacionado con:** N/A.
+
+**RF-006 · Recordatorio automático de cita**
+*   **Descripción:** El sistema envía una notificación de recordatorio (vía WhatsApp o SMS) al Cliente exactamente 24 horas antes de la hora programada para su cita.
+*   **Origen:** Entrevista con la dueña, 30 de septiembre (Confirmado - Dolor principal).
+*   **Prioridad:** Imprescindible.
+*   **Criterio de aceptación:** Si una cita está agendada para el jueves a las 16:00, el sistema dispara la notificación el miércoles a las 16:00 sin intervención humana.
+*   **Relacionado con:** Regla de Negocio 2 (Política de 24 horas).
 
 ---
 
@@ -225,7 +234,7 @@ El cliente quiere la máxima flexibilidad quiere poder cancelar su cita 5 minuto
     3. El sistema despliega una alerta advirtiendo el número de citas afectadas.
     4. La Veterinaria confirma la acción.
     5. El sistema cambia a estatus "Cancelada por urgencia" todas las citas restantes.
-    6. El sistema envía automáticamente correos electrónicos a los clientes afectados.
+    6. El sistema envía automáticamente mensajes de whatsapp y correos electrónicos a los clientes afectados.
 *   **Flujos alternos:**
     *   **3a. Sin citas futuras:** El sistema detecta que ya no hay citas pendientes hoy, bloquea el botón y notifica.
 *   **Postcondición:** Agenda bloqueada por el resto del día y notificaciones enviadas.
@@ -282,8 +291,10 @@ El cliente quiere la máxima flexibilidad quiere poder cancelar su cita 5 minuto
 | RF-003 | Entrevista 30 sep | CU-05 Suspender agenda por urgencia | Pantalla del Administrador (Botón Pánico)| Vigente |
 | RF-004 | Supuesto propio | CU-05 Suspender agenda por urgencia | N/A (Proceso backend) | Vigente |
 | RF-005 | Entrevista 30 sep | CU-03 Comprar productos físicos | Pantalla de Checkout de Tienda | Vigente |
+| RF-006 | Entrevista 30 sep | N/A (Proceso automático) | N/A (Proceso backend) | Vigente |
 | RNF-USA-001 | Derivado del sistema | CU-01 Agendar cita | Flujo completo de Nueva Cita | Vigente |
 | RNF-INT-001 | Entrevista 30 sep | CU-01 Agendar cita (Flujo Alt 6a)| Pantalla de Confirmación | Vigente |
+| RNF-DIS-001 | Derivado del sistema | Todos los Casos de Uso (Global) | N/A (Infraestructura) | Vigente |
 
 ---
 
@@ -294,3 +305,5 @@ El cliente quiere la máxima flexibilidad quiere poder cancelar su cita 5 minuto
 | 30/09/2026 | RF-001 | Tiempo de vacunación a 20 min | Confirmación en entrevista con Veterinaria |
 | 30/09/2026 | Alcance | Eliminación de entregas/paquetería | Confirmación en entrevista de recolección física |
 | 30/09/2026 | RF-003 | Se agregó requisito de botón de pánico | Hallazgo inesperado en entrevista sobre caos en urgencias |
+| 30/09/2026 | Alcance y CU-03 | Clarificación de control de existencias de catálogo vs. inventario médico | Corrección de contradicción detectada en inspección de requisitos |
+| 30/09/2026 | RF-006 | Se agregó requisito funcional de recordatorios | Para cubrir la promesa hecha en el Alcance del sistema |
