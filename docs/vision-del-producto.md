@@ -45,15 +45,18 @@
 
 - **Registra** citas médicas y servicios estéticos asociándolos a un cliente y su mascota.
 - **Bloquea** horarios en el calendario de la veterinaria automáticamente, dependiendo de la duración específica de cada tipo de servicio.
-- **Procesa** compras de productos físicos mediante un catálogo en línea.
+- **Procesa** Procesa compras y el cobro en línea de productos físicos de un catálogo mediante la integración con una pasarela de pagos externa (ej. Stripe o Mercado Pago).
 - **Envía** notificaciones automáticas de recordatorio (vía WhatsApp o SMS) a los clientes 24 horas antes de su cita.
 - **Autentica** a tres tipos de usuarios con permisos distintos (Cliente, Veterinaria, Soporte Técnico).
+- **Permite** a la Veterinaria cancelar o suspender en bloque las citas del resto del día con un solo botón en caso de urgencia médica, disparando notificaciones de reagendación automáticas a los clientes afectados.
 
 ### Explícitamente fuera del alcance
 
 - No gestiona expedientes clínicos detallados, historias médicas, ni almacenamiento de radiografías de las mascotas.
 - No controla el inventario físico de la clínica ni envía órdenes de reabastecimiento automáticas a proveedores.
 - No procesa el cobro ni la facturación de las consultas médicas (el servicio médico se paga presencialmente en la clínica).
+- No gestiona envíos a domicilio ni cobro de paquetería para las compras en línea (la entrega de productos es estrictamente mediante recolección física en la clínica).
+- No almacena ni procesa directamente datos sensibles de tarjetas de crédito o débito. Toda la transacción financiera y la seguridad de los datos bancarios se delegan a la pasarela de pagos externa.
 
 **Por qué queda fuera:**
 
@@ -85,9 +88,10 @@ Porque su objetivo principal es registrar, consultar y gestionar la información
 **Reglas de negocio que ya identifiqué:**
 
 
-1. Un servicio de "Vacunación" bloquea la agenda por 15 minutos, mientras que uno de "Estética" bloquea 45 minutos. El sistema debe calcular el tiempo a bloquear dinámicamente.
+1. Un servicio de "Vacunación" bloquea la agenda por 20 minutos, mientras que uno de "Estética" bloquea 45 minutos. El sistema debe calcular el tiempo a bloquear dinámicamente.
 2. El cliente solo puede cancelar su cita desde el sistema si lo hace con al menos 24 horas de anticipación; de lo contrario, la opción se bloquea.
 3. No todos los servicios se pueden agendar en línea. Por ejemplo, las cirugías están bloqueadas en el sistema web porque requieren una valoración médica presencial previa.
+4. Cada mascota requiere su propio bloque de tiempo en la agenda. Si un cliente desea llevar múltiples mascotas, el sistema debe obligarlo a seleccionar y agendar los servicios por separado para calcular el tiempo real.
 
 ---
 
