@@ -369,6 +369,17 @@ El cliente quiere la máxima flexibilidad quiere poder cancelar su cita 5 minuto
 | 30/09/2026 | Alcance y CU-03 | Clarificación de control de existencias de catálogo vs. inventario médico | Corrección de contradicción detectada en inspección de requisitos |
 | 30/09/2026 | RF-006 | Se agregó requisito funcional de recordatorios | Para cubrir la promesa hecha en el Alcance del sistema |
 | 30/09/2026 | RF-007 a RF-010 | Se agregaron cuatro requisitos funcionales adicionales | Formalización de reglas de negocio ya descritas en los Casos de Uso para alcanzar el umbral mínimo de diseño |
+| 01/10/2026 | Documento general | Se integró la Sección 8 (Revisión de la dupla) | Requisito de la rúbrica para documentar debilidades detectadas e implementaciones a futuro |
+
+
+
+## 8. Revisión de la dupla
+
+* **Vulnerabilidad de inasistencias (No-Show).** El sistema cuenta con el RF-007 para bloquear cancelaciones con menos de 24 horas, pero no define ningún estado o acción para cuando el cliente simplemente no asiste a la cita programada. Conviene definir un estado de "inasistencia" en el flujo de la cita.
+* **Falta de penalizaciones a usuarios.** Vinculado al punto anterior, no hay ningún RF que bloquee o castigue a los clientes que acumulan inasistencias. Se sugiere para la próxima iteración implementar un sistema de *strikes*, donde al llegar a 3 faltas, el sistema revoque su acceso al agendamiento web.
+* **Gestión de umbrales de inventario.** El RF-009 establece la deducción automática del stock al realizar una compra, pero el sistema no contempla notificar a la veterinaria cuando el stock esté por terminarse. Falta definir una regla para mandar alertas cuando un producto llegue a un mínimo de existencias.
+* **Ambigüedad en el atributo de Disponibilidad.** El RNF-DIS-001 mide el uptime del 99.9% excluyendo "ventanas de mantenimiento programadas", pero el documento no especifica en qué horarios y días caen esas ventanas (ej. madrugadas de domingo). Para que la métrica sea verificable, hace falta fijar ese horario.
+* **Riesgo en las notificaciones de urgencia.** El RF-004 exige despachar avisos en menos de 2 minutos al usar el botón de pánico. No se especifica si se manejará en segundo plano. Si hay muchas citas agendadas, la plataforma podría trabaarse mientras intenta enviar todos los correos al mismo tiempo.
 
 
 **Link al Figma:**  https://canon-nebula-65162367.figma.site/citas
