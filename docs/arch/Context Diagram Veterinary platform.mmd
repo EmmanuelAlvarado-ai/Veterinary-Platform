@@ -1,0 +1,13 @@
+flowchart TD
+    cli([Cliente])
+    vet([Veterinaria])
+    sis[Plataforma LavinPets]
+    pago[Pasarela de pagos]
+    msg[Servicio de mensajeria]
+
+    cli -->|agenda citas y compra productos| sis
+    vet -->|administra agenda y catalogo| sis
+    sis -->|procesa cobros web| pago
+    sis -->|envia recordatorios y alertas| msg
+
+    style sis fill:#ff5d00,color:#fff

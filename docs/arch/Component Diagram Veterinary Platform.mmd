@@ -1,0 +1,35 @@
+flowchart TD
+    web[App web]
+
+    subgraph api[API del sistema]
+        agenda[Agenda Medica<br/>citas y horarios]
+        ventas[Catalogo y Ventas<br/>productos y pedidos]
+        perfiles[Perfiles e Identidad<br/>usuarios y mascotas]
+        notif[Notificador<br/>interfaz de avisos]
+        adaptPago[Adaptador de Pagos<br/>interfaz pasarela]
+    end
+
+    db[(Base de datos)]
+    pago[Pasarela externa]
+    msg[Servicio de mensajeria]
+
+    web --> agenda
+    web --> ventas
+    web --> perfiles
+    
+    agenda -->|pregunta dueño y mascota| perfiles
+    ventas -->|asigna ticket a cliente| perfiles
+    
+    agenda -->|anuncia cancelacion masiva| notif
+    ventas -->|envia cobro| adaptPago
+    
+    notif --> msg
+    adaptPago --> pago
+    
+    agenda --> db
+    ventas --> db
+    perfiles --> db
+
+    style agenda fill:#ff5d00,color:#fff
+    style ventas fill:#ff5d00,color:#fff
+    style perfiles fill:#ff5d00,color:#fff

@@ -1,0 +1,21 @@
+flowchart TD
+    cli([Cliente])
+    vet([Veterinaria])
+
+    subgraph sistema[Plataforma LavinPets]
+        web[App web<br/>Frontend React]
+        api[API del sistema<br/>Backend Node.js]
+        db[(Base de datos<br/>PostgreSQL)]
+    end
+
+    pago[Pasarela de pagos<br/>Stripe]
+    msg[Servicio de mensajeria<br/>WhatsApp API]
+
+    cli -->|usa| web
+    vet -->|usa| web
+    web -->|HTTPS/JSON| api
+    api -->|lee y escribe| db
+    api -->|API REST| pago
+    api -->|Webhooks| msg
+
+    style api fill:#ff5d00,color:#fff
