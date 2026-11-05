@@ -6,7 +6,7 @@
 
 ---
 
-## 1. Sustantivos identificados (Lista cruda)
+## 1. Sustantivos identificados 
 
 **Origen de los datos:**  
 Extraídos directamente de la Especificación de Requisitos y los Casos de Uso del sistema LavinPets.
@@ -17,9 +17,6 @@ Extraídos directamente de la Especificación de Requisitos y los Casos de Uso d
 ---
 
 ## 2. Filtro de descartes
-
-**Criterios aplicados:**  
-Se aplicaron las cuatro reglas estándar para descartar sustantivos que no califican como clases del sistema.
 
 - **Nombre, Especie, Raza:** *Descartados (Es atributo).* Son datos internos que le pertenecen a la entidad Mascota, no clases independientes.
 - **Fecha, Hora:** *Descartados (Es atributo).* Son datos que definen a la Cita.
