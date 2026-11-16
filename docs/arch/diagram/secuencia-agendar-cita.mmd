@@ -1,0 +1,22 @@
+sequenceDiagram
+    actor Cli as Cliente
+    participant Web as App web
+    participant Serv as Servicio
+    participant Cita as Cita
+    participant BD as Base de datos
+
+    Cli->>Web: elige mascota, servicio, fecha y hora
+    Web->>+Serv: calcularTiempoBloqueo()
+    Serv-->>-Web: duracion (minutos)
+
+    Web->>+Cita: confirmarAgendamiento()
+
+    alt el horario está disponible
+        Cita->>+BD: INSERT INTO cita
+        BD-->>-Cita: ok
+        Cita-->>-Web: void (confirmación)
+        Web-->>Cli: Pantalla "Cita agendada con éxito"
+    else empalme detectado en BD
+        Cita-->>Web: error (horario ocupado)
+        Web-->>Cli: Alerta "Seleccione otro horario"
+    end
