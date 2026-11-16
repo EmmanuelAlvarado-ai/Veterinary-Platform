@@ -4,7 +4,7 @@
 
 ## Solicitud que se analiza
 
-Referencia a la solicitud: `sc-001-bloqueo-por-inasistencia.md`, solicitada por la dupla de revisión (actuando como dueña de la clínica) el 15 de noviembre de 2026.
+Referencia a la solicitud: `sc-001-bloqueo-por-inasistencia.md`, solicitada por la dupla de revisión el 15 de noviembre de 2026.
 
 ## Traducción a términos del sistema
 
