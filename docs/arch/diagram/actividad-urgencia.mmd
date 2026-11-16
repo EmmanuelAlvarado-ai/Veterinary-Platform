@@ -1,0 +1,22 @@
+flowchart TD
+    subgraph vet[Veterinaria]
+        v1[Presiona 'Suspender agenda del día']
+        v2[Confirma la alerta de impacto]
+    end
+    
+    subgraph sis[Sistema LavinPets]
+        s1{Hay citas futuras hoy?}
+        s2[Bloquea botón y notifica 'Agenda vacía']
+        s3[Cambia estado de citas a 'Suspendida']
+        s4[Envía aviso por WhatsApp]
+        s5[Envía aviso por Correo]
+    end
+    
+    v1 --> s1
+    s1 -->|No| s2
+    s1 -->|Sí| v2
+    v2 --> s3
+    
+    %% Ejecución en paralelo de notificaciones
+    s3 --> s4
+    s3 --> s5
