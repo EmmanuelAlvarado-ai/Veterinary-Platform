@@ -18,6 +18,10 @@ Especificar los requisitos funcionales y no funcionales, así como los casos de 
 - Envía notificaciones automáticas de recordatorio (vía WhatsApp o SMS) a los clientes 24 horas antes de su cita.
 - Autentica a tres tipos de usuarios con permisos distintos (Cliente, Veterinaria, Soporte Técnico).
 - Permite a la Veterinaria cancelar o suspender en bloque las citas del resto del día con un solo botón en caso de urgencia médica, disparando notificaciones de reagendación automáticas a los clientes afectados.
+- Gestiona la creación y edición de perfiles individuales de mascotas asociados a un dueño.
+- Permite a la Veterinaria administrar (agregar, editar, eliminar) un catálogo en línea de productos físicos.
+- Despliega un historial cronológico de citas pasadas para consulta del cliente.
+- Proporciona una vista diaria de la agenda para el control interno de la clínica.
 
 **Fuera del alcance:**  
 - No gestiona expedientes clínicos detallados, historias médicas, ni almacenamiento de radiografías de las mascotas.
