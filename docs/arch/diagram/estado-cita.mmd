@@ -1,0 +1,8 @@
+stateDiagram-v2
+    [*] --> Agendada
+    Agendada --> Completada: asiste / registrar en historial
+    Agendada --> Cancelada: cancela [faltan más de 24 horas] / liberar horario
+    Agendada --> Suspendida: activa urgencia / notificar reagendación
+    Completada --> [*]
+    Cancelada --> [*]
+    Suspendida --> [*]
