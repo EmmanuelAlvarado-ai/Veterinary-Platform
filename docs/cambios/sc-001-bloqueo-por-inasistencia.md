@@ -8,7 +8,7 @@ Propuesta · 15 de noviembre de 2026
 
 ## Quién la pide
 
-Dupla de revisión (actuando en el papel de la Veterinaria/Dueña de LavinPets).
+Dupla de revisión 
 
 ## Qué se pide
 
