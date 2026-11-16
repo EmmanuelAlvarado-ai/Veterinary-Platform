@@ -2,7 +2,7 @@
 
 **Sistema:** Plataforma LavinPets  
 **Autor:** Noé Emmanuel Alvarado Ríos  
-**Fecha de la última actualización:** 01/10/2026  
+**Fecha de la última actualización:** 15/11/2026  
 
 ---
 
@@ -61,6 +61,9 @@ El cliente quiere la máxima flexibilidad quiere poder cancelar su cita 5 minuto
 | RF-008 | Bloqueo individual por mascota | Importante | Entrevista (confirmado) |
 | RF-009 | Deducción automática de stock | Imprescindible | Derivado de CU-03 |
 | RF-010 | Control de acceso a catálogo | Imprescindible | Derivado de CU-04 |
+| RF-011 | Gestión de perfiles de mascota | Imprescindible | Derivado de CU-06 |
+| RF-012 | Visualización de agenda diaria | Imprescindible | Derivado de CU-07 |
+| RF-013 | Historial clínico básico | Importante | Derivado de CU-08 |
 
 ### 3.2 Fichas
 
@@ -154,6 +157,33 @@ El cliente quiere la máxima flexibilidad quiere poder cancelar su cita 5 minuto
 | **Criterio de aceptación** | - Un usuario tipo Cliente ingresa manualmente la URL de gestión de catálogo. El sistema rechaza la petición y lo redirige a la página principal mostrando el error "Acceso denegado". |
 | **Relacionado con** | N/A |
 
+**RF-011 - Gestión de perfiles de mascota**
+| Campo | Contenido |
+| :--- | :--- |
+| **Descripción** | El sistema debe permitir al usuario tipo Cliente registrar, visualizar y editar los datos correspondientes a los perfiles de sus mascotas. |
+| **Origen** | Supuesto derivado de la necesidad de agendar citas personalizadas (CU-06). |
+| **Prioridad** | Imprescindible |
+| **Criterio de aceptación** | - Al ingresar a la sección "Mis Mascotas", el usuario puede crear un nuevo perfil llenando un formulario, el cual queda guardado y vinculado a su cuenta. |
+| **Relacionado con** | CU-06, RF-008 |
+
+**RF-012 - Visualización de agenda diaria**
+| Campo | Contenido |
+| :--- | :--- |
+| **Descripción** | El sistema debe mostrar a la Veterinaria una lista ordenada cronológicamente de todas las citas confirmadas para la fecha en curso. |
+| **Origen** | Supuesto derivado de la operación diaria de la clínica (CU-07). |
+| **Prioridad** | Imprescindible |
+| **Criterio de aceptación** | - Al acceder a la vista "Hoy", el administrador observa las citas del día ordenadas desde la más temprana a la más tardía con la información del paciente. |
+| **Relacionado con** | CU-07 |
+
+**RF-013 - Historial clínico básico**
+| Campo | Contenido |
+| :--- | :--- |
+| **Descripción** | El sistema debe mostrar al Cliente un registro histórico cronológico de las citas con estado "Completado" por cada mascota. |
+| **Origen** | Supuesto derivado del seguimiento a pacientes (CU-08). |
+| **Prioridad** | Importante |
+| **Criterio de aceptación** | - Al consultar el perfil de una mascota, el sistema lista las visitas pasadas, indicando fecha y tipo de servicio recibido. |
+| **Relacionado con** | CU-08 |
+
 ---
 
 ## 4. Requisitos no funcionales
@@ -203,7 +233,6 @@ El cliente quiere la máxima flexibilidad quiere poder cancelar su cita 5 minuto
 ---
 
 ## 5. Casos de uso
-
 
 ### Lista de Casos de Uso del Sistema
 1. **CU-01:** Agendar cita de servicio
@@ -267,7 +296,7 @@ El cliente quiere la máxima flexibilidad quiere poder cancelar su cita 5 minuto
     *   **2a. Falta de stock (Empalme físico):** El sistema detecta que el producto se agotó físicamente. Bloquea el cobro y pide al Cliente sacarlo del carrito.
     *   **4a. Pago declinado:** La pasarela rechaza la tarjeta. El sistema regresa al Cliente a la pantalla de pago mostrando el error de la pasarela.
 *   **Postcondición:** El producto queda pagado, apartado, y la Veterinaria recibe la orden.
-*   **Requisitos que realiza:** RF-005.
+*   **Requisitos que realiza:** RF-005, RF-009.
 
 **CU-04 · Administrar catálogo de productos**
 *   **Actor principal:** Veterinaria (Administrador).
@@ -282,7 +311,7 @@ El cliente quiere la máxima flexibilidad quiere poder cancelar su cita 5 minuto
 *   **Flujos alternos:**
     *   **3a. Datos inconsistentes:** Ingresa un precio negativo. El sistema impide guardar y marca el campo con error.
 *   **Postcondición:** Base de datos actualizada y visible para clientes.
-*   **Requisitos que realiza:** Control de Acceso (Implícito), RF-005.
+*   **Requisitos que realiza:** RF-010.
 
 **CU-05 · Suspender agenda por urgencia**
 *   **Actor principal:** Veterinaria (Administrador).
@@ -313,7 +342,7 @@ El cliente quiere la máxima flexibilidad quiere poder cancelar su cita 5 minuto
 *   **Flujos alternos:**
     *   **4a. Campos faltantes:** El Cliente olvida la especie. El sistema detiene el registro y exige el dato.
 *   **Postcondición:** Mascota disponible para reservas.
-*   **Requisitos que realiza:** Estructura de base de datos relacional (Implícito).
+*   **Requisitos que realiza:** RF-011.
 
 **CU-07 · Consultar agenda del día**
 *   **Actor principal:** Veterinaria (Administrador).
@@ -326,7 +355,7 @@ El cliente quiere la máxima flexibilidad quiere poder cancelar su cita 5 minuto
 *   **Flujos alternos:**
     *   **2a. Agenda vacía:** No hay citas programadas, el sistema muestra "Día libre de citas programadas".
 *   **Postcondición:** La Veterinaria tiene visibilidad de su carga de trabajo.
-*   **Requisitos que realiza:** Visualización de agenda (Implícito).
+*   **Requisitos que realiza:** RF-012.
 
 **CU-08 · Consultar historial de citas**
 *   **Actor principal:** Cliente.
@@ -338,7 +367,7 @@ El cliente quiere la máxima flexibilidad quiere poder cancelar su cita 5 minuto
 *   **Flujos alternos:**
     *   **2a. Sin historial:** La mascota es nueva y no tiene citas previas, el sistema indica "Aún no hay registros de visitas".
 *   **Postcondición:** El Cliente conoce las fechas de las atenciones previas.
-*   **Requisitos que realiza:** Consulta de información (Implícito).
+*   **Requisitos que realiza:** RF-013.
 
 ---
 
@@ -356,10 +385,12 @@ El cliente quiere la máxima flexibilidad quiere poder cancelar su cita 5 minuto
 | RF-008 | Entrevista 30 sep | CU-01 Agendar cita (Flujo Alt 4a) | Pantalla de Selección de Servicio | Vigente |
 | RF-009 | Derivado de CU-03 | CU-03 Comprar productos físicos | N/A (Proceso backend) | Vigente |
 | RF-010 | Derivado de CU-04 | CU-04 Administrar catálogo | Pantalla de Gestión de Catálogo | Vigente |
+| RF-011 | Derivado de CU-06 | CU-06 Registrar perfil de mascota | Pantalla de Mis Mascotas | Vigente |
+| RF-012 | Derivado de CU-07 | CU-07 Consultar agenda del día | Pantalla Principal Admin | Vigente |
+| RF-013 | Derivado de CU-08 | CU-08 Consultar historial de citas | Pantalla de Detalle de Mascota | Vigente |
 | RNF-USA-001 | Derivado del sistema | CU-01 Agendar cita | Flujo completo de Nueva Cita | Vigente |
 | RNF-INT-001 | Entrevista 30 sep | CU-01 Agendar cita (Flujo Alt 6a)| Pantalla de Confirmación | Vigente |
 | RNF-DIS-001 | Derivado del sistema | Todos los Casos de Uso (Global) | N/A (Infraestructura) | Vigente |
-
 
 ---
 
@@ -374,16 +405,14 @@ El cliente quiere la máxima flexibilidad quiere poder cancelar su cita 5 minuto
 | 30/09/2026 | RF-006 | Se agregó requisito funcional de recordatorios | Para cubrir la promesa hecha en el Alcance del sistema |
 | 30/09/2026 | RF-007 a RF-010 | Se agregaron cuatro requisitos funcionales adicionales | Formalización de reglas de negocio ya descritas en los Casos de Uso para alcanzar el umbral mínimo de diseño |
 | 01/10/2026 | Documento general | Se integró la Sección 8 (Revisión de la dupla) | Requisito de la rúbrica para documentar debilidades detectadas e implementaciones a futuro |
-
-
+| 15/11/2026 | RF-011 a RF-013 | Se agregaron requisitos funcionales base para resolver tareas implícitas | Retroalimentación de la maestra: asegurar trazabilidad total de los módulos de Mascotas y Agenda |
 
 ## 8. Revisión de la dupla
 
-* **Vulnerabilidad de inasistencias (No-Show).** El sistema cuenta con el RF-007 para bloquear cancelaciones con menos de 24 horas, pero no define ningún estado o acción para cuando el cliente simplemente no asiste a la cita programada. Conviene definir un estado de "inasistencia" en el flujo de la cita.
-* **Falta de penalizaciones a usuarios.** Vinculado al punto anterior, no hay ningún RF que bloquee o castigue a los clientes que acumulan inasistencias. Se sugiere para la próxima iteración implementar un sistema de *strikes*, donde al llegar a 3 faltas, el sistema revoque su acceso al agendamiento web.
-* **Gestión de umbrales de inventario.** El RF-009 establece la deducción automática del stock al realizar una compra, pero el sistema no contempla notificar a la veterinaria cuando el stock esté por terminarse. Falta definir una regla para mandar alertas cuando un producto llegue a un mínimo de existencias.
-* **Ambigüedad en el atributo de Disponibilidad.** El RNF-DIS-001 mide el uptime del 99.9% excluyendo "ventanas de mantenimiento programadas", pero el documento no especifica en qué horarios y días caen esas ventanas (ej. madrugadas de domingo). Para que la métrica sea verificable, hace falta fijar ese horario.
-* **Riesgo en las notificaciones de urgencia.** El RF-004 exige despachar avisos en menos de 2 minutos al usar el botón de pánico. No se especifica si se manejará en segundo plano. Si hay muchas citas agendadas, la plataforma podría trabaarse mientras intenta enviar todos los correos al mismo tiempo.
-
+- **Vulnerabilidad de inasistencias (No-Show).** El sistema cuenta con el RF-007 para bloquear cancelaciones con menos de 24 horas, pero no define ningún estado o acción para cuando el cliente simplemente no asiste a la cita programada. Conviene definir un estado de "inasistencia" en el flujo de la cita.
+- **Falta de penalizaciones a usuarios.** Vinculado al punto anterior, no hay ningún RF que bloquee o castigue a los clientes que acumulan inasistencias. Se sugiere para la próxima iteración implementar un sistema de *strikes*, donde al llegar a 3 faltas, el sistema revoque su acceso al agendamiento web.
+- **Gestión de umbrales de inventario.** El RF-009 establece la deducción automática del stock al realizar una compra, pero el sistema no contempla notificar a la veterinaria cuando el stock esté por terminarse. Falta definir una regla para mandar alertas cuando un producto llegue a un mínimo de existencias.
+- **Ambigüedad en el atributo de Disponibilidad.** El RNF-DIS-001 mide el uptime del 99.9% excluyendo "ventanas de mantenimiento programadas", pero el documento no especifica en qué horarios y días caen esas ventanas (ej. madrugadas de domingo). Para que la métrica sea verificable, hace falta fijar ese horario.
+- **Riesgo en las notificaciones de urgencia.** El RF-004 exige despachar avisos en menos de 2 minutos al usar el botón de pánico. No se especifica si se manejará en segundo plano. Si hay muchas citas agendadas, la plataforma podría trabaarse mientras intenta enviar todos los correos al mismo tiempo.
 
 **Link al Figma:**  https://canon-nebula-65162367.figma.site/citas
