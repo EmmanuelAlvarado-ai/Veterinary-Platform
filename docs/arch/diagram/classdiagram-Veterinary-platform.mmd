@@ -1,0 +1,51 @@
+classDiagram
+    class Usuario {
+        -id: String
+        -nombre: String
+        -correo: String
+        -rol: String
+        +iniciarSesion() bool
+        +gestionarDatos() void
+    }
+    class Mascota {
+        -id: String
+        -nombre: String
+        -especie: String
+        -peso: float
+    }
+    class Cita {
+        -id: String
+        -fecha: Date
+        -hora: Time
+        -estado: String
+        +confirmarAgendamiento() void
+        +cancelarCita() bool
+    }
+    class Servicio {
+        <<interface>>
+        -nombre: String
+        -precioBase: float
+        +calcularTiempoBloqueo()* int
+    }
+    class Producto {
+        -id: String
+        -nombre: String
+        -precio: float
+        -stock: int
+        +descontarStock(cantidad: int) bool
+        +validarDisponibilidad() bool
+    }
+    class Pedido {
+        -id: String
+        -fecha: Date
+        -total: float
+        -estado: String
+        +calcularTotal() float
+        +confirmarPago() bool
+    }
+
+    Usuario "1" -- "*" Mascota : registra
+    Usuario "1" -- "*" Pedido : realiza
+    Mascota "1" -- "*" Cita : recibe
+    Cita "*" -- "1" Servicio : incluye
+    Pedido "*" -- "*" Producto : contiene
